@@ -1,0 +1,58 @@
+{
+  "name": "vue3-canvas-video-player",
+  "version": "1.0.0",
+  "description": "Video player that operates on Vue3 and uses canvas",
+  "author": "GronkOut <gronkout@gmail.com>",
+  "keywords": [
+    "vue3",
+    "canvas",
+    "video",
+    "player",
+    "range",
+    "fps",
+    "boundingbox"
+  ],
+  "homepage": "https://github.com/GronkOut/vue3-canvas-video-player",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GronkOut/vue3-canvas-video-player.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GronkOut/vue3-canvas-video-player/issues",
+    "email": "gronkout@gmail.com"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": "~8.1.2"
+  },
+  "directories": {
+    "example": "examples",
+    "lib": "lib"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/vue3-canvas-video-player.umd.cjs",
+  "module": "./dist/vue3-canvas-video-player.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/vue3-canvas-video-player.js",
+      "require": "./dist/vue3-canvas-video-player.umd.js"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "vue": "^3.2.41",
+    "vue3-canvas-video-player": "file:vue3-canvas-video-player-1.0.0.tgz"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.2.0",
+    "vite": "^3.2.3"
+  },
+  "license": "MIT"
+}
