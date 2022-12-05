@@ -62,9 +62,9 @@
 
 <script setup>
 import { reactive, ref } from 'vue';
-import Vue3CanvasVideoPlayer from '../lib/Vue3CanvasVideoPlayer.vue';
-// import Vue3CanvasVideoPlayer from 'vue3-canvas-video-player';
-// import 'vue3-canvas-video-player/dist/style.css';
+// import Vue3CanvasVideoPlayer from '../lib/Vue3CanvasVideoPlayer.vue';
+import Vue3CanvasVideoPlayer from 'vue3-canvas-video-player';
+import 'vue3-canvas-video-player/dist/style.css';
 
 const videoVisible = ref(true);
 

@@ -43,15 +43,88 @@ import 'vue3-canvas-video-player/dist/style.css';
 
 ## Props
 
-Prop | Description | Default
-:- | :- | :-
-`src` | video source path | `''`
-`muted` | muted volume | `false`
-`autoplay` | autoplay video (when muted) | `false`
-`range` | range seconds (`[1.2, 3.4]`) | `[]`
-`fps` | fps (use `0` to disable) | `0`
-`bbox` | bounding box (fps required) | `{}`
-`type` | player style (`overlay`, `contain`) | `overlay`
-`messageTime` | message time (use `0` to disable) | `0`
-`preview` | preview on seek bar | `false`
-`darkMode` | use dark mode | `true`
+### src
+
+video source path
+
+> default `''`
+
+### muted
+
+muted volume
+
+> default `false`
+
+### autoplay
+
+autoplay video (when muted)
+
+> default `false`
+
+### range
+
+range seconds  
+ex `[1.2, 3.4]`
+
+> default `[]`
+
+![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/range.gif)
+
+### fps
+
+fps (use `0` to disable)
+
+> default `0`
+
+![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/fps.gif)
+
+### bbox
+
+bounding box (fps required)
+
+> default `{}`
+
+![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/bbox.gif)
+
+### type
+
+player style  
+`overlay`, `contain`
+
+> default `overlay` 
+
+![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/type.gif)
+
+### messageTime
+
+message time (use `0` to disable)
+
+> default `1000`
+
+![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/messageTime.gif)
+
+### preview
+
+preview on seek bar
+
+> default `false`
+
+![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/preview.gif)
+
+### darkMode
+
+use dark mode
+
+> default `true`
+
+![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/darkMode.gif)
+
+## Shortcuts
+
+Keys | Description
+:- | :-
+`ctrl` + `alt` + `ArrowUp` | Volume up
+`ctrl` + `alt` + `ArrowDown` | Volume down
+`ctrl` + `alt` + `ArrowLeft` | Prev second or frame
+`ctrl` + `alt` + `ArrowRight` | Next second or frame
+`ctrl` + `alt` + `g` | Go to frame (fps required)

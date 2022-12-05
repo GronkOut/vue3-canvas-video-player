@@ -528,7 +528,11 @@ const changeFrame = (forward) => {
 
   if (mouseDown) {
     changeFrameInterval = setInterval(() => {
-      setFrame(forward);
+      if (forward) {
+        forwardFrame();
+      } else {
+        backwardFrame();
+      }
     }, 60);
   } else {
     clearInterval(changeFrameInterval);
