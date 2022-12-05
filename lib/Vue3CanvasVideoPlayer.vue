@@ -1,5 +1,5 @@
 <template>
-  <div id="video-frame-canvas-player" ref="containerRef" :data-dark-mode="darkMode" :data-type="props.type">
+  <div id="vue3-canvas-video-player" ref="containerRef" :data-dark-mode="darkMode" :data-type="props.type">
     <!-- 헤더 -->
     <div class="header">
       <div class="time" :class="!player.range.enabled && 'active'">
@@ -183,6 +183,7 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted, onUnmounted } from 'vue';
+import { secondToTimeString, secondToFrameNumber, frameNumberToSecond, numericWithComma } from './utils';
 
 // props
 const props = defineProps({
@@ -342,23 +343,6 @@ const initial = () => {
   draw();
 
   window.dispatchEvent(new Event('resize'));
-};
-
-// 공통 함수
-const secondToTimeString = (seconds) => {
-  const sec = parseInt(seconds);
-  const h = Math.floor(sec / 3600);
-  const m = Math.floor((sec % 3600) / 60);
-  const s = sec % 60;
-
-  return `${ (h < 10) ? '0' + h : h }:${ (m < 10) ? '0' + m : m }:${ (s < 10) ? '0' + s : s }`;
-};
-const secondToFrameNumber = (seconds) => Math.round(seconds * props.fps);
-const frameNumberToSecond = (frameNumber) => frameNumber / props.fps;
-const numericWithComma = (value) => {
-  if (value === undefined) return false;
-
-  return new Intl.NumberFormat().format(value);
 };
 
 // 메세지
@@ -711,7 +695,7 @@ onUnmounted(() => {
 
 <style scoped>
 /* 플레이어 */
-#video-frame-canvas-player {
+#vue3-canvas-video-player {
   --header-height: 30px;
   --footer-height: 60px;
 
@@ -759,7 +743,7 @@ onUnmounted(() => {
   height: 100%;
   user-select: none;
 }
-#video-frame-canvas-player[data-dark-mode=true] {
+#vue3-canvas-video-player[data-dark-mode=true] {
   --color-00-100: rgba(255, 255, 255, 1.0);
   --color-00-090: rgba(255, 255, 255, 0.9);
   --color-00-080: rgba(255, 255, 255, 0.8);
@@ -798,13 +782,13 @@ onUnmounted(() => {
   --color-15-090: rgba(0, 0, 0, 0.9);
   --color-15-100: rgba(0, 0, 0, 1.0);
 }
-#video-frame-canvas-player[data-type=overlay] {
+#vue3-canvas-video-player[data-type=overlay] {
   display: block;
 }
-#video-frame-canvas-player[data-type=overlay] .header {
+#vue3-canvas-video-player[data-type=overlay] .header {
   display: none;
 }
-#video-frame-canvas-player[data-type=overlay] .footer {
+#vue3-canvas-video-player[data-type=overlay] .footer {
   position: absolute;
   inset: auto 0 0;
   height: 70px;
@@ -812,34 +796,34 @@ onUnmounted(() => {
   transform: translateY(100px);
   transition: all 0.5s ease-out;
 }
-#video-frame-canvas-player[data-type=overlay] .footer.active {
+#vue3-canvas-video-player[data-type=overlay] .footer.active {
   transform: translateY(0);
 }
-#video-frame-canvas-player[data-type=overlay] .seek {
+#vue3-canvas-video-player[data-type=overlay] .seek {
   background-color: transparent;
 }
-#video-frame-canvas-player[data-type=overlay] .seek .preview {
+#vue3-canvas-video-player[data-type=overlay] .seek .preview {
   margin-bottom: 0;
 }
-#video-frame-canvas-player[data-type=overlay] .controller {
+#vue3-canvas-video-player[data-type=overlay] .controller {
   height: 40px;
   background-color: transparent;
 }
-#video-frame-canvas-player[data-type=overlay] .controller .volume .drag {
+#vue3-canvas-video-player[data-type=overlay] .controller .volume .drag {
   background-color: var(--color-15-050);
 }
-#video-frame-canvas-player[data-type=overlay] .controller .playback-rate .list {
+#vue3-canvas-video-player[data-type=overlay] .controller .playback-rate .list {
   background-color: var(--color-15-050);
 }
 
-.video-hidden {
+#vue3-canvas-video-player .video-hidden {
   visibility: hidden;
   width: 0;
   height: 0;
 }
 
 /* 헤더 */
-#video-frame-canvas-player .header {
+#vue3-canvas-video-player .header {
   box-sizing: border-box;
   display: flex;
   padding: 0 10px;
@@ -849,23 +833,23 @@ onUnmounted(() => {
   align-items: center;
   background-color: var(--color-14-100);
 }
-#video-frame-canvas-player .header .time {
+#vue3-canvas-video-player .header .time {
   font-size: 14px;
   color: var(--color-00-100);
   opacity: 0.1;
   transition: all 0.2s;
 }
-#video-frame-canvas-player .header .time.active {
+#vue3-canvas-video-player .header .time.active {
   opacity: 1;
 }
 
 /* 메인 */
-#video-frame-canvas-player .main {
+#vue3-canvas-video-player .main {
   overflow: hidden;
   height: 100%;
   background-color: var(--color-15-100);
 }
-#video-frame-canvas-player .canvas {
+#vue3-canvas-video-player .canvas {
   object-fit: contain;
   width: 100%;
   height: 100%;
@@ -873,43 +857,43 @@ onUnmounted(() => {
 }
 
 /* 푸터 */
-#video-frame-canvas-player .footer {
+#vue3-canvas-video-player .footer {
   display: flex;
   width: 100%;
   flex-direction: column;
   height: var(--footer-height);
 }
-#video-frame-canvas-player .seek {
+#vue3-canvas-video-player .seek {
   position: relative;
   height: 30px;
   background-color: var(--color-13-100);
 }
-#video-frame-canvas-player .seek .drag {
+#vue3-canvas-video-player .seek .drag {
   height: 100%;
 }
-#video-frame-canvas-player .seek .drag:hover + .preview {
+#vue3-canvas-video-player .seek .drag:hover + .preview {
   bottom: 100%;
   opacity: 1;
 }
-#video-frame-canvas-player .seek .drag .area {
+#vue3-canvas-video-player .seek .drag .area {
   position: absolute;
   inset: 0;
   cursor: pointer;
 }
-#video-frame-canvas-player .seek .drag .area:before {
+#vue3-canvas-video-player .seek .drag .area:before {
   position: absolute;
   inset: 10px 0;
   background-color: var(--color-14-100);
   content: '';
 }
-#video-frame-canvas-player .seek .drag .bar {
+#vue3-canvas-video-player .seek .drag .bar {
   position: absolute;
   inset: 10px auto;
   height: 10px;
   background-color: var(--color-05-100);
   pointer-events: none;
 }
-#video-frame-canvas-player .seek .drag .bar:before {
+#vue3-canvas-video-player .seek .drag .bar:before {
   position: absolute;
   inset: -2px -1px -2px auto;
   width: 2px;
@@ -917,7 +901,7 @@ onUnmounted(() => {
   filter: drop-shadow(0 0 3px var(--color-00-100));
   content: '';
 }
-#video-frame-canvas-player .seek .drag .range {
+#vue3-canvas-video-player .seek .drag .range {
   position: absolute;
   inset: 10px auto;
   height: 10px;
@@ -925,7 +909,7 @@ onUnmounted(() => {
   mix-blend-mode: hard-light;
   pointer-events: none;
 }
-#video-frame-canvas-player .seek .preview {
+#vue3-canvas-video-player .seek .preview {
   position: absolute;
   bottom: 50%;
   width: 100px;
@@ -938,12 +922,12 @@ onUnmounted(() => {
   pointer-events: none;
   opacity: 0;
 }
-#video-frame-canvas-player .seek .preview .canvas {
+#vue3-canvas-video-player .seek .preview .canvas {
   width: 100%;
   height: auto;
   vertical-align: top;
 }
-#video-frame-canvas-player .seek .preview .time {
+#vue3-canvas-video-player .seek .preview .time {
   margin-top: 5px;
   text-align: center;
   font-size: 11px;
@@ -951,7 +935,7 @@ onUnmounted(() => {
 }
 
 /* 컨트롤러 */
-#video-frame-canvas-player .controller {
+#vue3-canvas-video-player .controller {
   display: flex;
   height: 30px;
   gap: 5px;
@@ -959,7 +943,7 @@ onUnmounted(() => {
 }
 
 /* 토글 버튼 */
-#video-frame-canvas-player .controller .control-button {
+#vue3-canvas-video-player .controller .control-button {
   overflow: hidden;
   display: flex;
   width: 30px;
@@ -973,26 +957,26 @@ onUnmounted(() => {
   transition: all 0.2s;
   cursor: pointer;
 }
-#video-frame-canvas-player .controller .control-button.active,
-#video-frame-canvas-player .controller .control-button:hover {
+#vue3-canvas-video-player .controller .control-button.active,
+#vue3-canvas-video-player .controller .control-button:hover {
   opacity: 1;
   filter: drop-shadow(0 0 3px var(--color-00-100));
 }
-#video-frame-canvas-player .controller .icon {
+#vue3-canvas-video-player .controller .icon {
   width: 100%;
   height: 100%;
   stroke: var(--color-00-100);
 }
 
 /* 소리 */
-#video-frame-canvas-player .controller .volume {
+#vue3-canvas-video-player .controller .volume {
   position: relative;
 }
-#video-frame-canvas-player .controller .volume:hover .drag {
+#vue3-canvas-video-player .controller .volume:hover .drag {
   height: 120px;
   opacity: 1;
 }
-#video-frame-canvas-player .controller .volume .drag {
+#vue3-canvas-video-player .controller .volume .drag {
   position: absolute;
   bottom: 100%;
   width: 30px;
@@ -1001,13 +985,13 @@ onUnmounted(() => {
   opacity: 0;
   transition: all 0.2s;
 }
-#video-frame-canvas-player .controller .volume .drag .area {
+#vue3-canvas-video-player .controller .volume .drag .area {
   position: absolute;
   inset: 10px;
   background-color: var(--color-13-100);
   cursor: pointer;
 }
-#video-frame-canvas-player .controller .volume .drag .bar {
+#vue3-canvas-video-player .controller .volume .drag .bar {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -1016,7 +1000,7 @@ onUnmounted(() => {
 }
 
 /* 재생 속도 */
-#video-frame-canvas-player .controller .playback-rate {
+#vue3-canvas-video-player .controller .playback-rate {
   position: relative;
   display: flex;
   height: 30px;
@@ -1024,11 +1008,11 @@ onUnmounted(() => {
   justify-content: center;
   cursor: pointer;
 }
-#video-frame-canvas-player .controller .playback-rate:hover .list {
+#vue3-canvas-video-player .controller .playback-rate:hover .list {
   height: 150px;
   opacity: 1;
 }
-#video-frame-canvas-player .controller .playback-rate .text {
+#vue3-canvas-video-player .controller .playback-rate .text {
   overflow: hidden;
   padding: 0 5px;
   height: 30px;
@@ -1039,11 +1023,11 @@ onUnmounted(() => {
   opacity: 0.5;
   transition: all 0.2s;
 }
-#video-frame-canvas-player .controller .playback-rate .text:hover {
+#vue3-canvas-video-player .controller .playback-rate .text:hover {
   opacity: 1;
   filter: drop-shadow(0 0 3px var(--color-00-100));
 }
-#video-frame-canvas-player .controller .playback-rate .list {
+#vue3-canvas-video-player .controller .playback-rate .list {
   overflow: hidden;
   position: absolute;
   bottom: 100%;
@@ -1055,7 +1039,7 @@ onUnmounted(() => {
   opacity: 0;
   transition: all 0.2s;
 }
-#video-frame-canvas-player .controller .playback-rate .item .button {
+#vue3-canvas-video-player .controller .playback-rate .item .button {
   display: block;
   padding: 5px 10px;
   color: var(--color-05-100);
@@ -1065,13 +1049,13 @@ onUnmounted(() => {
   opacity: 0.5;
   transition: all 0.2s;
 }
-#video-frame-canvas-player .controller .playback-rate .item .button:hover {
+#vue3-canvas-video-player .controller .playback-rate .item .button:hover {
   opacity: 1;
   filter: drop-shadow(0 0 3px var(--color-05-100));
 }
 
 /* 메세지 */
-#video-frame-canvas-player .message {
+#vue3-canvas-video-player .message {
   position: absolute;
   display: flex;
   inset: 0;
@@ -1079,17 +1063,17 @@ onUnmounted(() => {
   align-items: center;
   pointer-events: none;
 }
-#video-frame-canvas-player .message .text {
+#vue3-canvas-video-player .message .text {
   padding: 5px 10px;
   border-radius: 5px;
   background-color: var(--color-15-050);
   color: var(--color-00-100);
   opacity: 0;
 }
-#video-frame-canvas-player .message .text.show {
+#vue3-canvas-video-player .message .text.show {
   animation: fadeIn 0.5s 1 forwards;
 }
-#video-frame-canvas-player .message .text.hide {
+#vue3-canvas-video-player .message .text.hide {
   animation: fadeOut 0.5s 1 forwards;
 }
 
