@@ -1,6 +1,6 @@
 {
   "name": "vue3-canvas-video-player",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Video player that operates on Vue3 and uses canvas",
   "author": "GronkOut <gronkout@gmail.com>",
   "keywords": [
