@@ -2,6 +2,8 @@
 
 Canvas-based video player available on Vue3. If you enter fps, it operates in frames. You can set the range and visualize the image recognition bounding-box data.
 
+[Demo](https://stackblitz.com/edit/vue3-canvas-video-player?file=src/App.vue)
+
 ## Usage
 
 ### Install
@@ -108,3 +110,7 @@ Keys | Description
 `ctrl` + `alt` + `ArrowLeft` | Prev second or frame
 `ctrl` + `alt` + `ArrowRight` | Next second or frame
 `ctrl` + `alt` + `g` | Go to frame (fps required)
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)
