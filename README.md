@@ -1,5 +1,7 @@
 # Vue3 Canvas Video Player
 
+Canvas-based video player available on Vue3. If you enter fps, it operates in frames. You can set the range and visualize the image recognition bounding-box data.
+
 ## Usage
 
 ### Install
@@ -18,11 +20,11 @@ import 'vue3-canvas-video-player/dist/style.css';
 
 <template>
   <Vue3CanvasVideoPlayer
-    :src="'video.mp4'"
-    :muted="true"
-    :autoplay="true"
-    :range="[10, 20]"
-    :fps="30"
+    :src="'video.mp4'" // ''
+    :muted="true" // false
+    :autoplay="true" // false
+    :range="[10, 20]" // [0, 0]
+    :fps="30" // 0
     :bbox="{
       data: {
         100: [0, 200, 100, 400],
@@ -32,11 +34,11 @@ import 'vue3-canvas-video-player/dist/style.css';
       borderSize: 1,
       borderColor: 'rgba(255, 0, 0, 0.5)',
       fillColor: 'rgba(0, 0, 255, 0.5)',
-    }"
-    :type="'contain'"
-    :messageTime="1000"
-    :preview="true"
-    :darkMode="true"
+    }" // { data: {}, borderSize: 1, borderColor: 'rgba(255, 0, 0, 0.5)', fillColor: 'rgba(0, 0, 255, 0.5)' }; } }
+    :type="'contain'" // 'overlay'
+    :messageTime="1000" // 1000
+    :preview="true" // false
+    :darkMode="true" // true
   />
 </template>
 ```
@@ -45,77 +47,55 @@ import 'vue3-canvas-video-player/dist/style.css';
 
 ### src
 
-video source path
-
-> default `''`
+Path to the video source file.
 
 ### muted
 
-muted volume
-
-> default `false`
+Defines the start-up mute state.
 
 ### autoplay
 
-autoplay video (when muted)
-
-> default `false`
+Automatically play video at startup. It only works when it is muted.
 
 ### range
 
-range seconds  
-ex `[1.2, 3.4]`
-
-> default `[]`
+Use seconds to set the range of the beginning and end of the video.
 
 ![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/range.gif)
 
 ### fps
 
-fps (use `0` to disable)
-
-> default `0`
+When you enter the FPS for the video, it operates in frames.
 
 ![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/fps.gif)
 
 ### bbox
 
-bounding box (fps required)
-
-> default `{}`
+Visualize the image recognition bounding-box data. You can change the line thickness, fill and line color. It only works when use fps.
 
 ![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/bbox.gif)
 
 ### type
 
-player style  
-`overlay`, `contain`
-
-> default `overlay` 
+You can use 'contain' mode to prevent the controller from covering the screen, or 'overlay' mode for movie viewing.
 
 ![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/type.gif)
 
 ### messageTime
 
-message time (use `0` to disable)
-
-> default `1000`
+Sets the time when messages displayed in the center of the screen disappear. No message is displayed when `0`.
 
 ![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/messageTime.gif)
 
 ### preview
 
-preview on seek bar
-
-> default `false`
+Displays a preview in the seek bar.
 
 ![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/preview.gif)
 
 ### darkMode
 
-use dark mode
-
-> default `true`
+Use dark or light mode.
 
 ![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/darkMode.gif)
 
