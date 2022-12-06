@@ -4,6 +4,8 @@ Canvas-based video player available on Vue3. If you enter fps, it operates in fr
 
 [Demo](https://stackblitz.com/edit/vue3-canvas-video-player?file=src/App.vue)
 
+> Streaming videos may have delays. Local video files are recommended.
+
 ## Usage
 
 ### Install
