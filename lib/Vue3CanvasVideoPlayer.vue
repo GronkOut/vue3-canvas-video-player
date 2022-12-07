@@ -25,9 +25,9 @@ const props = defineProps({
   src: { type: String, default: '', required: true }, // 리소스
   muted: { type: Boolean, default: false }, // 음소거
   autoplay: { type: Boolean, default: false }, // 자동재생
-  range: { type: Array, default() { return [0, 0]; } }, // 구간
+  range: { type: Array, validator: (value) => !value.length || (value.length === 2 && value.every((n) => (typeof n === 'number'))), default: () => [0, 0] }, // 구간
   fps: { type: Number, default: 0 }, // FPS
-  bbox: { type: Object, default() { return { data: {}, borderSize: 1, borderColor: 'rgba(255, 0, 0, 0.5)', fillColor: 'rgba(0, 0, 255, 0.5)' }; } }, // 바운딩 박스
+  bbox: { type: Object, default: () => ({ data: {}, borderSize: 1, borderColor: 'rgba(255, 0, 0, 0.5)', fillColor: 'rgba(0, 0, 255, 0.5)' }) }, // 바운딩 박스
   type: { type: String, default: 'overlay' }, // 컨테인 스타일
   messageTime: { type: Number, default: 1000 }, // 메세지 시간
   preview: { type: Boolean, default: false }, // 미리보기

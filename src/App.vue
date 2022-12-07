@@ -3,7 +3,7 @@
     <Vue3CanvasVideoPlayer
       class="player"
       v-if="videoVisible"
-      :src="'video.mp4'"
+      :src="'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'"
       :muted="muted"
       :autoplay="autoplay"
       :range="range"
@@ -90,7 +90,7 @@ const handleAutoplay = ({ target }) => {
   }, 100);
 };
 
-const range = ref([10, 20]);
+const range = ref([]);
 const handleRange = ({ target }) => {
   videoVisible.value = false;
 

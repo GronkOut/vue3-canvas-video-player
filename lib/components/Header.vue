@@ -45,10 +45,12 @@ const hasFps = computed(() => data.video.fps > 0);
   height: var(--header-height);
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
   background-color: var(--color-14-100);
 }
 .cvp-information {
   font-size: 14px;
+  white-space: nowrap;
   color: var(--color-00-100);
   opacity: 0.1;
   transition: all 0.2s;

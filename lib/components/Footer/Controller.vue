@@ -242,6 +242,7 @@ const hasBbox = computed(() => Object.keys(data.bbox.data).length > 0);
 }
 .cvp-controller-playback-rate:hover .cvp-controller-playback-rate-list {
   height: 150px;
+  line-height: 14px;
   opacity: 1;
 }
 .cvp-controller-playback-rate-text {

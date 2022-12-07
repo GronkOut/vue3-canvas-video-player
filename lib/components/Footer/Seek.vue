@@ -8,6 +8,7 @@
         @mouseup="data.container.mouseDown = false"
         @mouseleave="data.container.mouseDown = false"
       >
+        <div class="cvp-seek-buffer" :style="{ width: `${ data.seek.bufferWidth }%` }" />
         <div class="cvp-seek-bar" :style="{ width: `${ data.seek.width }%` }" />
         <div v-if="hasRange" class="cvp-seek-range" :style="{ left: `${ data.range.left }px`, width: `${ data.range.width }px` }" />
       </div>
@@ -94,6 +95,13 @@ const onLoadedMetaData = () => {
   background-color: var(--color-14-100);
   content: '';
 }
+.cvp-seek-buffer {
+  position: absolute;
+  inset: 10px auto;
+  height: 10px;
+  background-color: var(--color-11-100);
+  pointer-events: none;
+}
 .cvp-seek-bar {
   position: absolute;
   inset: 10px auto;
@@ -105,7 +113,7 @@ const onLoadedMetaData = () => {
   position: absolute;
   inset: -2px -1px -2px auto;
   width: 2px;
-  background-color: var(--color-05-100);
+  background-color: var(--color-00-100);
   filter: drop-shadow(0 0 3px var(--color-00-100));
   content: '';
 }
@@ -155,15 +163,15 @@ const onLoadedMetaData = () => {
   inset: 0;
   background-color: var(--color-00-010);
 }
+[data-type=overlay] .cvp-seek-buffer {
+  top: 0;
+  background-color: var(--color-00-020);
+}
 [data-type=overlay] .cvp-seek-bar {
   top: 0;
-  background-color: var(--color-15-050);
+  background-color: var(--color-00-050);
 }
 [data-type=overlay] .cvp-seek-range {
   top: 0;
-}
-[data-type=overlay] .cvp-seek-bar:before {
-  background-color: var(--color-00-030);
-  filter: drop-shadow(0 0 3px var(--color-00-050));
 }
 </style>

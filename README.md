@@ -1,6 +1,6 @@
 # Vue3 Canvas Video Player
 
-Canvas-based video player available on Vue3. If you enter fps, it operates in frames. You can set the range and visualize the image recognition bounding-box data.
+Canvas-based video player available on Vue3. If you enter FPS, it operates in frames. You can set the range and visualize the image recognition bounding-box data.
 
 [Demo](https://stackblitz.com/edit/vue3-canvas-video-player?file=src/App.vue)
 
@@ -75,7 +75,7 @@ When you enter the FPS for the video, it operates in frames.
 
 ### bbox
 
-Visualize the image recognition bounding-box data. You can change the line thickness, fill and line color. It only works when use fps.
+Visualize the image recognition bounding-box data. You can change the line thickness, fill and line color. It only works when use FPS.
 
 ![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/bbox.gif)
 
@@ -111,7 +111,7 @@ Keys | Description
 `ctrl` + `alt` + `ArrowDown` | Volume down
 `ctrl` + `alt` + `ArrowLeft` | Prev second or frame
 `ctrl` + `alt` + `ArrowRight` | Next second or frame
-`ctrl` + `alt` + `g` | Go to frame (fps required)
+`ctrl` + `alt` + `g` | Go to frame (FPS required)
 
 ## License
 
