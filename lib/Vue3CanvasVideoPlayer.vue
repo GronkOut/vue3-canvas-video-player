@@ -6,7 +6,11 @@
     :data-type="props.type"
   >
     <Header />
-    <Main :src="props.src" :muted="props.muted" :autoplay="props.autoplay" />
+    <Main
+      :src="props.src"
+      :muted="props.muted"
+      :autoplay="props.autoplay"
+    />
     <Footer />
     <Message />
   </div>

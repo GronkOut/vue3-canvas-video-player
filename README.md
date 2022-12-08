@@ -17,7 +17,7 @@ npm install --save vue3-canvas-video-player
 ### Component
 
 ```jsx
-<script>
+<script setup>
 import Vue3CanvasVideoPlayer from 'vue3-canvas-video-player';
 import 'vue3-canvas-video-player/dist/style.css';
 </script>
@@ -27,6 +27,7 @@ import 'vue3-canvas-video-player/dist/style.css';
     :src="'video.mp4'" // ''
     :muted="true" // false
     :autoplay="true" // false
+    :loop="true" // false
     :range="[10, 20]" // [0, 0]
     :fps="30" // 0
     :bbox="{
@@ -43,6 +44,12 @@ import 'vue3-canvas-video-player/dist/style.css';
     :messageTime="1000" // 1000
     :preview="true" // false
     :darkMode="true" // true
+    @loadedmetadata="(event) => console.log('loadedmetadata', event)"
+    @play="(event) => console.log('play', event)"
+    @pause="(event) => console.log('pause', event)"
+    @timeupdate="(event) => console.log('timeupdate', event)"
+    @volumechange="(event) => console.log('volumechange', event)"
+    @error="(event) => console.log('error', event)"
   />
 </template>
 ```
@@ -60,6 +67,10 @@ Defines the start-up mute state.
 ### autoplay
 
 Automatically play video at startup. It only works when it is muted.
+
+### loop
+
+Which controls whether the media element should start over when it reaches the end.
 
 ### range
 
@@ -102,6 +113,36 @@ Displays a preview in the seek bar.
 Use dark or light mode.
 
 ![image](https://github.com/GronkOut/vue3-canvas-video-player/raw/main/public/darkMode.gif)
+
+## Events
+
+### loadedmetadata
+
+The `loadedmetadata` event is fired when the metadata has been loaded.
+
+### play
+
+The `play` event is fired when the `paused` property is changed from `true` to `false`, as a result of the `play` method, or the `autoplay` attribute.
+
+### pause
+
+The `pause` event is sent when a request to pause an activity is handled and the activity has entered its paused state, most commonly after the media has been paused through a call to the element's `pause()` method.
+
+The event is sent once the `pause()` method returns and after the media element's `paused` property has been changed to `true`.
+
+### timeupdate
+
+The `timeupdate` event is fired when the time indicated by the `currentTime` attribute has been updated.
+
+The event frequency is dependent on the system load, but will be thrown between about 4Hz and 66Hz (assuming the event handlers don't take longer than 250ms to run). User agents are encouraged to vary the frequency of the event based on the system load and the average cost of processing the event each time, so that the UI updates are not any more frequent than the user agent can comfortably handle while decoding the video.
+
+### volumechange
+
+The `volumechange` event is fired when the volume has changed.
+
+### error
+
+The `error` event is fired when the resource could not be loaded due to an error (for example, a network connectivity problem).
 
 ## Shortcuts
 

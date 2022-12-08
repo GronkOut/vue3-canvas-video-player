@@ -6,7 +6,12 @@
       :src="src"
       :muted="muted"
       :autoplay="autoplay"
-      @loadedmetadata="onLoadedMetaData"
+      @loadedmetadata="(event) => onLoadedMetaData(event)"
+      @play="(event) => emit('play', event)"
+      @pause="(event) => emit('pause', event)"
+      @timeupdate="(event) => emit('timeupdate', event)"
+      @volumechange="(event) => emit('volumechange', event)"
+      @error="(event) => emit('error', event)"
     />
     <canvas
       class="cvp-canvas"
@@ -31,11 +36,21 @@ const props = defineProps({
 const video = ref(null);
 const canvas = ref(null);
 
+// emits
+const emit = defineEmits([
+  'loadedmetadata',
+  'play',
+  'pause',
+  'timeupdate',
+  'volumechange',
+  'error',
+]);
+
 // composition
 const { data, initialVideo, toggleVideoPlay } = usePlayer();
 
 // handler
-const onLoadedMetaData = () => {
+const onLoadedMetaData = (event) => {
   Object.assign(data, {
     video: {
       ...data.video,
@@ -49,6 +64,8 @@ const onLoadedMetaData = () => {
   });
 
   initialVideo();
+
+  emit('loadedmetadata', event);
 };
 </script>
 
