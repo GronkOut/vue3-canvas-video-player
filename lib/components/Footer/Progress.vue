@@ -1,22 +1,22 @@
 <template>
-  <div class="cvp-seek">
-    <div class="cvp-seek-drag">
+  <div class="cvp-progress">
+    <div class="cvp-progress-drag">
       <div
-        class="cvp-seek-area"
+        class="cvp-progress-area"
         @mousedown.self="(event) => { data.container.mouseDown = true; setVideoSeek(event); }"
         @mousemove="setVideoSeek"
         @mouseup="data.container.mouseDown = false"
         @mouseleave="data.container.mouseDown = false"
       >
-        <div class="cvp-seek-buffer" :style="{ width: `${ data.seek.bufferWidth }%` }" />
-        <div class="cvp-seek-bar" :style="{ width: `${ data.seek.width }%` }" />
-        <div v-if="hasRange" class="cvp-seek-range" :style="{ left: `${ data.range.left }px`, width: `${ data.range.width }px` }" />
+        <div class="cvp-progress-buffer" :style="{ width: `${ data.progress.bufferWidth }%` }" />
+        <div class="cvp-progress-bar" :style="{ width: `${ data.progress.seekWidth }%` }" />
+        <div v-if="hasRange" class="cvp-progress-range" :style="{ left: `${ data.range.left }px`, width: `${ data.range.width }px` }" />
       </div>
     </div>
-    <div v-if="data.preview.enabled" class="cvp-seek-preview" :style="{ left: `${ data.preview.left }px` }">
-      <video class="cvp-seek-preview-video" ref="video" :src="data.video.src" @loadedmetadata="onLoadedMetaData" />
-      <canvas class="cvp-seek-preview-canvas" ref="canvas" />
-      <div class="cvp-seek-preview-time">{{ data.preview.time }}</div>
+    <div v-if="data.preview.enabled" class="cvp-progress-preview" :style="{ left: `${ data.preview.left }px` }">
+      <video class="cvp-progress-preview-video" ref="video" :src="data.video.src" @loadedmetadata="onLoadedMetaData" />
+      <canvas class="cvp-progress-preview-canvas" ref="canvas" />
+      <div class="cvp-progress-preview-time">{{ data.preview.time }}</div>
     </div>
   </div>
 </template>
@@ -72,44 +72,44 @@ const onLoadedMetaData = () => {
 </script>
 
 <style scoped>
-.cvp-seek {
+.cvp-progress {
   position: relative;
   height: 30px;
   background-color: var(--color-13-100);
 }
-.cvp-seek-drag {
+.cvp-progress-drag {
   height: 100%;
 }
-.cvp-seek-drag:hover + .cvp-seek-preview {
+.cvp-progress-drag:hover + .cvp-progress-preview {
   bottom: 100%;
   opacity: 1;
 }
-.cvp-seek-area {
+.cvp-progress-area {
   position: absolute;
   inset: 0;
   cursor: pointer;
 }
-.cvp-seek-area:before {
+.cvp-progress-area:before {
   position: absolute;
   inset: 10px 0;
   background-color: var(--color-14-100);
   content: '';
 }
-.cvp-seek-buffer {
+.cvp-progress-buffer {
   position: absolute;
   inset: 10px auto;
   height: 10px;
   background-color: var(--color-11-100);
   pointer-events: none;
 }
-.cvp-seek-bar {
+.cvp-progress-bar {
   position: absolute;
   inset: 10px auto;
   height: 10px;
   background-color: var(--color-05-100);
   pointer-events: none;
 }
-.cvp-seek-bar:before {
+.cvp-progress-bar:before {
   position: absolute;
   inset: -2px -1px -2px auto;
   width: 2px;
@@ -117,15 +117,15 @@ const onLoadedMetaData = () => {
   filter: drop-shadow(0 0 3px var(--color-00-100));
   content: '';
 }
-.cvp-seek-range {
+.cvp-progress-range {
   position: absolute;
   inset: 10px auto;
   height: 10px;
   background-color: #409eff;
-  mix-blend-mode: hard-light;
+  mix-blend-mode: color;
   pointer-events: none;
 }
-.cvp-seek-preview {
+.cvp-progress-preview {
   position: absolute;
   bottom: 50%;
   width: 100px;
@@ -138,40 +138,40 @@ const onLoadedMetaData = () => {
   pointer-events: none;
   opacity: 0;
 }
-.cvp-seek-preview-video {
+.cvp-progress-preview-video {
   visibility: hidden;
   width: 0;
   height: 0;
 }
-.cvp-seek-preview-canvas {
+.cvp-progress-preview-canvas {
   width: 100%;
   height: auto;
   vertical-align: top;
 }
-.cvp-seek-preview-time {
+.cvp-progress-preview-time {
   margin-top: 5px;
   text-align: center;
   font-size: 11px;
   color: var(--color-05-100);
 }
 
-[data-type=overlay] .cvp-seek {
+[data-type=overlay] .cvp-progress {
   height: 10px;
   background-color: transparent;
 }
-[data-type=overlay] .cvp-seek-area:before {
+[data-type=overlay] .cvp-progress-area:before {
   inset: 0;
   background-color: var(--color-00-010);
 }
-[data-type=overlay] .cvp-seek-buffer {
+[data-type=overlay] .cvp-progress-buffer {
   top: 0;
   background-color: var(--color-00-020);
 }
-[data-type=overlay] .cvp-seek-bar {
+[data-type=overlay] .cvp-progress-bar {
   top: 0;
   background-color: var(--color-00-050);
 }
-[data-type=overlay] .cvp-seek-range {
+[data-type=overlay] .cvp-progress-range {
   top: 0;
 }
 </style>

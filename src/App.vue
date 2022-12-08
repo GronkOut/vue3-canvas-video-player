@@ -106,7 +106,7 @@ const handleLoop = ({ target }) => {
   }, 100);
 };
 
-const range = ref([10, 12]);
+const range = ref([10, 20]);
 const handleRange = ({ target }) => {
   videoVisible.value = false;
 

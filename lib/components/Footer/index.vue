@@ -1,13 +1,13 @@
 <template>
   <div class="cvp-footer" :class="data.container.mouseMove && 'cvp-footer-active'" @mouseenter="data.container.mouseHold = true" @mouseleave="data.container.mouseHold = false; onContainerMouseMove()">
-    <Seek />
+    <Progress />
     <Controller />
   </div>
 </template>
 
 <script setup>
 import usePlayer from '../../compositions/player';
-import Seek from './Seek.vue';
+import Progress from './Progress.vue';
 import Controller from './Controller.vue';
 
 // composition
