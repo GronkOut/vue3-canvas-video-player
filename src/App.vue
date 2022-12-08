@@ -6,6 +6,7 @@
       :src="'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'"
       :muted="muted"
       :autoplay="autoplay"
+      :loop="loop"
       :range="range"
       :fps="fps"
       :bbox="bbox"
@@ -22,6 +23,10 @@
       <div class="row">
         <label for="autoplay">autoplay</label>
         <input type="checkbox" name="autoplay" checked @change="handleAutoplay" />
+      </div>
+      <div class="row">
+        <label for="loop">loop</label>
+        <input type="checkbox" name="loop" checked @change="handleLoop" />
       </div>
       <div class="row">
         <label for="range">range</label>
@@ -90,7 +95,18 @@ const handleAutoplay = ({ target }) => {
   }, 100);
 };
 
-const range = ref([]);
+const loop = ref(true);
+const handleLoop = ({ target }) => {
+  videoVisible.value = false;
+
+  loop.value = target.checked;
+
+  setTimeout(() => {
+    videoVisible.value = true;
+  }, 100);
+};
+
+const range = ref([10, 12]);
 const handleRange = ({ target }) => {
   videoVisible.value = false;
 
