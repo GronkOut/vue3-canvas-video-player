@@ -13,6 +13,9 @@
     />
     <Footer />
     <Message />
+    <div v-if="data.block.visible" class="cvp-block">
+      {{ data.block.text }}
+    </div>
   </div>
 </template>
 
@@ -79,6 +82,11 @@ onMounted(() => {
       ...data.message,
       time: props.messageTime,
     },
+    block: {
+      ...data.block,
+      visible: !props.src.length,
+      text: 'Video file has not been loaded'
+    },
   });
 
   if (data.container.type === 'overlay') {
@@ -137,6 +145,7 @@ onBeforeUnmount(() => {
   --color-15-100: rgba(255, 255, 255, 1.0);
 
   position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-rows: var(--header-height) 1fr var(--footer-height);
   height: 100%;
@@ -183,5 +192,15 @@ onBeforeUnmount(() => {
 }
 #vue3-canvas-video-player[data-type=overlay] {
   display: block;
+}
+
+.cvp-block {
+  position: absolute;
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-07-100);
+  background-color: var(--color-15-050);
 }
 </style>

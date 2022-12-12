@@ -263,7 +263,6 @@ const hasBbox = computed(() => Object.keys(data.bbox.data).length > 0);
 .cvp-controller-playback-rate-text {
   overflow: hidden;
   padding: 0 5px;
-  width: 30px;
   height: 30px;
   font-size: 15px;
   text-align: center;
@@ -306,5 +305,16 @@ const hasBbox = computed(() => Object.keys(data.bbox.data).length > 0);
 
 [data-type=overlay] .cvp-controller {
   background-color: transparent;
+}
+[data-type=overlay] .cvp-controller-volume-drag {
+  bottom: calc(100% + 5px);
+  background-color: var(--color-15-030);
+}
+[data-type=overlay] .cvp-controller-playback-rate-list {
+  bottom: calc(100% + 5px);
+  background-color: var(--color-15-030);
+}
+[data-type=overlay] .cvp-controller-playback-rate-button {
+  color: var(--color-03-100);
 }
 </style>
