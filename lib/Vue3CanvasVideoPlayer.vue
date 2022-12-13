@@ -13,14 +13,14 @@
     />
     <Footer />
     <Message />
-    <div v-if="data.block.visible" class="cvp-block">
+    <div v-if="!props.src.length" class="cvp-block">
       {{ data.block.text }}
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import usePlayer from './compositions/player';
 import Header from './components/Header.vue';
 import Main from './components/Main.vue';
@@ -47,6 +47,11 @@ const container = ref(null);
 
 // composition
 const { data, onContainerMouseMove } = usePlayer();
+
+// watch
+watch(() => props.src, (src) => {
+  data.video.src = src;
+});
 
 onMounted(() => {
   Object.assign(data, {
@@ -84,7 +89,6 @@ onMounted(() => {
     },
     block: {
       ...data.block,
-      visible: !props.src.length,
       text: 'Video file has not been loaded'
     },
   });

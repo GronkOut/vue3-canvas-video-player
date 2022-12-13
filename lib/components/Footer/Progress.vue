@@ -14,7 +14,7 @@
       </div>
     </div>
     <div v-if="data.preview.enabled" class="cvp-progress-preview" :style="{ left: `${ data.preview.left }px` }">
-      <video class="cvp-progress-preview-video" ref="video" :src="data.video.src" @loadedmetadata="onLoadedMetaData" />
+      <video class="cvp-progress-preview-video" ref="video" :src="data.video.src" @canplaythrough="onCanplayThrough" />
       <canvas class="cvp-progress-preview-canvas" ref="canvas" />
       <div class="cvp-progress-preview-time">{{ data.preview.time }}</div>
     </div>
@@ -36,7 +36,7 @@ const { data, setVideoSeek } = usePlayer();
 const hasRange = computed(() => (data.range.start > 0) && (data.range.end > 0));
 
 // handler
-const onLoadedMetaData = () => {
+const onCanplayThrough = () => {
   const {
     video: { width: videoWidth, height: videoHeight },
     preview: { enabled: previewEnabled },
