@@ -1,8 +1,8 @@
-import { reactive as Te, computed as F, onMounted as pe, onUnmounted as $e, openBlock as p, createElementBlock as f, createElementVNode as n, normalizeClass as N, unref as t, toDisplayString as $, createCommentVNode as H, pushScopeId as fe, popScopeId as me, ref as U, withModifiers as he, normalizeStyle as j, Fragment as Ee, renderList as Ve, createStaticVNode as G, createVNode as L, watch as Se, onBeforeUnmount as Ce } from "vue";
+import { reactive as $e, computed as F, onMounted as fe, onUnmounted as Ee, openBlock as p, createElementBlock as f, createElementVNode as n, normalizeClass as N, unref as t, toDisplayString as $, createCommentVNode as H, pushScopeId as me, popScopeId as he, ref as U, withModifiers as ge, normalizeStyle as j, Fragment as Ve, renderList as Se, createStaticVNode as G, createVNode as L, watch as pe, onBeforeUnmount as Ce } from "vue";
 const W = (r) => {
-  const e = parseInt(r), v = Math.floor(e / 3600), s = Math.floor(e % 3600 / 60), i = e % 60;
-  return `${v < 10 ? "0" + v : v}:${s < 10 ? "0" + s : s}:${i < 10 ? "0" + i : i}`;
-}, C = (r, e) => Math.round(r * e), te = (r, e) => r / e, q = (r) => r === void 0 ? !1 : new Intl.NumberFormat().format(r), a = Te({
+  const e = parseInt(r), v = Math.floor(e / 3600), a = Math.floor(e % 3600 / 60), i = e % 60;
+  return `${v < 10 ? "0" + v : v}:${a < 10 ? "0" + a : a}:${i < 10 ? "0" + i : i}`;
+}, C = (r, e) => Math.round(r * e), te = (r, e) => r / e, q = (r) => r === void 0 ? !1 : new Intl.NumberFormat().format(r), s = $e({
   container: {
     element: null,
     fullScreen: !1,
@@ -62,177 +62,177 @@ const W = (r) => {
 });
 let Q = !1;
 function P() {
-  const r = F(() => a.range.start > 0 && a.range.end > 0), e = F(() => a.video.fps > 0), v = F(() => Object.keys(a.bbox.data).length > 0), s = () => {
+  const r = F(() => s.range.start > 0 && s.range.end > 0), e = F(() => s.video.fps > 0), v = F(() => Object.keys(s.bbox.data).length > 0), a = () => {
     const {
-      video: { element: o, canvas: l, width: c, height: b, duration: _, fps: k },
+      video: { element: o, canvas: l, width: c, height: y, duration: _, fps: k },
       range: { start: M, end: O },
-      bbox: { data: K, fillColor: ee, borderSize: T, borderColor: ye }
-    } = a, I = l.getContext("2d");
-    l.width = c, l.height = b, o.loop = a.video.loop, r.value && (o.currentTime = M);
+      bbox: { data: K, fillColor: ee, borderSize: T, borderColor: we }
+    } = s, I = l.getContext("2d");
+    l.width = c, l.height = y, o.loop = s.video.loop, r.value && (o.currentTime = M);
     const ie = () => {
       const {
-        video: { loop: we },
-        range: { enabled: xe },
-        bbox: { enabled: ke }
-      } = a;
-      I.drawImage(o, 0, 0, c, b);
-      let J = a.video.currentTime = o.currentTime;
-      if (r.value && xe ? (A(), a.progress.seekWidth = ((J - M) / (O - M) * 100).toFixed(10), a.progress.bufferWidth = 100) : (o.ended && we && (J = 0), a.progress.seekWidth = (J / _ * 100).toFixed(10), o.buffered.length > 0 && (a.progress.bufferWidth = o.buffered.end(o.buffered.length - 1) / _ * 100)), e.value && v.value && ke) {
-        const Me = C(J, k), B = K[Me];
+        video: { loop: xe },
+        range: { enabled: ke },
+        bbox: { enabled: Me }
+      } = s;
+      I.drawImage(o, 0, 0, c, y);
+      let J = s.video.currentTime = o.currentTime;
+      if (r.value && ke ? (A(), s.progress.seekWidth = ((J - M) / (O - M) * 100).toFixed(10), s.progress.bufferWidth = 100) : (o.ended && xe && (J = 0), s.progress.seekWidth = (J / _ * 100).toFixed(10), o.buffered.length > 0 && (s.progress.bufferWidth = o.buffered.end(o.buffered.length - 1) / _ * 100)), e.value && v.value && Me) {
+        const Te = C(J, k), B = K[Te];
         if (B && B.length === 4) {
           const de = B[0], ce = B[1], ve = B[2] - B[0], ue = B[3] - B[1];
-          I.fillStyle = ee, I.fillRect(de, ce, ve, ue), T && (I.lineWidth = T, I.strokeStyle = ye, I.strokeRect(de - T / 2, ce - T / 2, ve + T, ue + T));
+          I.fillStyle = ee, I.fillRect(de, ce, ve, ue), T && (I.lineWidth = T, I.strokeStyle = we, I.strokeRect(de - T / 2, ce - T / 2, ve + T, ue + T));
         }
       }
-      o.paused && Math.floor(a.progress.seekWidth) === 100 && (a.video.paused = !0), window.requestAnimationFrame(ie);
+      o.paused && Math.floor(s.progress.seekWidth) === 100 && (s.video.paused = !0), window.requestAnimationFrame(ie);
     };
     ie();
   }, i = (o) => {
     const {
-      video: { element: l, duration: c, fps: b },
+      video: { element: l, duration: c, fps: y },
       range: { enabled: _, start: k, end: M }
-    } = a;
-    l.currentTime = r.value && _ ? Math.max(Math.min(o, M), k) : Math.max(Math.min(o, c), 0), V(`Seek ${W(l.currentTime)} ${e.value ? `[${q(C(l.currentTime, b))}]` : ""} (${r.value && _ ? Math.round((l.currentTime - k) / (M - k) * 100) : Math.round(l.currentTime / c * 100)}%)`);
-  }, y = ({ offsetX: o }) => {
+    } = s;
+    l.currentTime = r.value && _ ? Math.max(Math.min(o, M), k) : Math.max(Math.min(o, c), 0), V(`Seek ${W(l.currentTime)} ${e.value ? `[${q(C(l.currentTime, y))}]` : ""} (${r.value && _ ? Math.round((l.currentTime - k) / (M - k) * 100) : Math.round(l.currentTime / c * 100)}%)`);
+  }, g = ({ offsetX: o }) => {
     const {
       container: { mouseDown: l },
-      video: { element: c, duration: b },
+      video: { element: c, duration: y },
       progress: { seekTotal: _ },
       preview: { enabled: k, element: M },
       range: { enabled: O, start: K, end: ee }
-    } = a;
+    } = s;
     if (!c)
       return;
-    const T = O ? o / _ * (ee - K) + K : o / _ * b;
-    T === 1 / 0 || isNaN(T) || (l && i(T), M && k && (M.currentTime = T, a.preview.time = W(T), o < 65 ? a.preview.left = 65 : o > _ - 65 ? a.preview.left = _ - 65 : a.preview.left = o));
+    const T = O ? o / _ * (ee - K) + K : o / _ * y;
+    T === 1 / 0 || isNaN(T) || (l && i(T), M && k && (M.currentTime = T, s.preview.time = W(T), o < 65 ? s.preview.left = 65 : o > _ - 65 ? s.preview.left = _ - 65 : s.preview.left = o));
   };
   let S;
   const E = ({ detail: o }) => {
     if (o === 1) {
       const {
         video: { element: l, paused: c },
-        range: { enabled: b, start: _, end: k }
-      } = a;
+        range: { enabled: y, start: _, end: k }
+      } = s;
       S = setTimeout(() => {
-        c ? (r.value && b && l.currentTime === k && (l.currentTime = _), l.play()) : l.pause(), V(c ? "Play" : "Pause"), a.video.paused = !c;
+        c ? (r.value && y && l.currentTime === k && (l.currentTime = _), l.play()) : l.pause(), V(c ? "Play" : "Pause"), s.video.paused = !c;
       }, 250);
     } else
       o === 2 && (clearTimeout(S), ae());
-  }, g = (o) => {
+  }, b = (o) => {
     const {
       video: { element: l }
-    } = a, c = Math.max(Math.min(o, 1), 0);
-    l.volume = a.video.volume = c, V(`Volume ${Math.floor(c * 100)}%`);
+    } = s, c = Math.max(Math.min(o, 1), 0);
+    l.volume = s.video.volume = c, V(`Volume ${Math.floor(c * 100)}%`);
   }, x = ({ offsetY: o }) => {
     const {
       container: { mouseDown: l }
-    } = a;
-    l && g((100 - o) / 100);
+    } = s;
+    l && b((100 - o) / 100);
   }, m = () => {
     const {
       video: { element: o, muted: l }
-    } = a;
-    o.muted = a.video.muted = !l, V(l ? "Unmuted" : "Muted");
+    } = s;
+    o.muted = s.video.muted = !l, V(l ? "Unmuted" : "Muted");
   }, h = () => {
     const {
       video: { element: o, fps: l }
-    } = a;
+    } = s;
     e.value ? i(te(C(o.currentTime, l) + 1, l)) : i(o.currentTime + 1);
   }, D = () => {
     const {
       video: { element: o, fps: l }
-    } = a;
+    } = s;
     e.value ? i(te(C(o.currentTime, l) - 1, l)) : i(o.currentTime - 1);
   };
   let z;
   const oe = (o) => {
     const {
       container: { mouseDown: l }
-    } = a;
+    } = s;
     l ? z = setInterval(() => {
       o ? h() : D();
     }, 60) : clearInterval(z);
   }, d = (o) => {
     const {
       video: { element: l }
-    } = a;
-    l.playbackRate = a.video.playbackRate = o, V(`Playback Rate x${o.toFixed(1)}`);
+    } = s;
+    l.playbackRate = s.video.playbackRate = o, V(`Playback Rate x${o.toFixed(1)}`);
   }, A = () => {
     const {
       video: { element: o, loop: l },
-      range: { enabled: c, start: b, end: _ }
-    } = a;
-    !o || !(r.value && c) || (o.currentTime < b && (o.currentTime = b), o.currentTime > _ && (l ? o.currentTime = b : (o.currentTime = _, o.pause(), a.video.paused = !0)));
+      range: { enabled: c, start: y, end: _ }
+    } = s;
+    !o || !(r.value && c) || (o.currentTime < y && (o.currentTime = y), o.currentTime > _ && (l ? o.currentTime = y : (o.currentTime = _, o.pause(), s.video.paused = !0)));
   }, u = () => {
     const {
       video: { element: o, duration: l },
       progress: { seekTotal: c },
-      range: { enabled: b, start: _, end: k }
-    } = a;
-    !o || (A(), a.range.left = r.value && b ? 0 : _ / l * c, a.range.width = r.value && b ? c : k / l * c - _ / l * c);
+      range: { enabled: y, start: _, end: k }
+    } = s;
+    !o || (A(), s.range.left = r.value && y ? 0 : _ / l * c, s.range.width = r.value && y ? c : k / l * c - _ / l * c);
   }, ne = () => {
     const {
       range: { enabled: o }
-    } = a;
-    a.range.enabled = !o, u(), V(o ? "Inactive range" : "Active range");
+    } = s;
+    s.range.enabled = !o, u(), V(o ? "Inactive range" : "Active range");
   }, _e = () => {
     const {
       video: { element: o, loop: l }
-    } = a;
-    o.loop = a.video.loop = !l, V(l ? "Play once" : "Repeat play");
-  }, ge = () => {
+    } = s;
+    o.loop = s.video.loop = !l, V(l ? "Play once" : "Repeat play");
+  }, be = () => {
     const {
       bbox: { enabled: o }
-    } = a;
-    a.bbox.enabled = !o, V(o ? "Hide bounding box" : "Show bounding box");
+    } = s;
+    s.bbox.enabled = !o, V(o ? "Hide bounding box" : "Show bounding box");
   };
   let Z;
   const V = (o) => {
-    const { message: l } = a, { time: c } = l;
+    const { message: l } = s, { time: c } = l;
     !c || (l.text = o, l.visible = !0, Z && clearTimeout(Z), Z = setTimeout(() => {
       l.visible = !1;
     }, c));
   }, ae = () => {
     const {
       container: { element: o }
-    } = a;
+    } = s;
     document.fullscreenElement ? document.exitFullscreen() : o.requestFullscreen();
   }, se = () => {
     const {
       container: { element: o },
       preview: { enabled: l }
-    } = a;
-    a.progress.seekTotal = o.offsetWidth, r.value && u(), l && (a.preview.left = 0);
+    } = s;
+    s.progress.seekTotal = o.offsetWidth, r.value && u(), l && (s.preview.left = 0);
   }, le = ({ altKey: o, ctrlKey: l, key: c }) => {
     const {
-      video: { element: b, paused: _, volume: k, fps: M }
-    } = a;
+      video: { element: y, paused: _, volume: k, fps: M }
+    } = s;
     if (o && l) {
       if (c === "g" && e.value) {
-        const O = window.prompt("Go to frame number", C(b.currentTime, M));
-        _ && b.pause(), b.currentTime = te(O, M);
+        const O = window.prompt("Go to frame number", C(y.currentTime, M));
+        _ && y.pause(), y.currentTime = te(O, M);
       }
-      c === "ArrowUp" && g(k + 0.05), c === "ArrowDown" && g(k - 0.05), c === "ArrowLeft" && D(), c === "ArrowRight" && h();
+      c === "ArrowUp" && b(k + 0.05), c === "ArrowDown" && b(k - 0.05), c === "ArrowLeft" && D(), c === "ArrowRight" && h();
     }
   }, re = () => {
-    a.container.fullScreen = Boolean(document.fullscreenElement), V(`${a.container.fullScreen ? "Full" : "Normal"} screen`);
+    s.container.fullScreen = Boolean(document.fullscreenElement), V(`${s.container.fullScreen ? "Full" : "Normal"} screen`);
   };
   let X;
-  const be = () => {
-    X && clearTimeout(X), a.container.mouseMove = !0, !a.container.mouseHold && (X = setTimeout(() => {
-      a.container.mouseMove = !1;
+  const ye = () => {
+    X && clearTimeout(X), s.container.mouseMove = !0, !s.container.mouseHold && (X = setTimeout(() => {
+      s.container.mouseMove = !1;
     }, 2e3));
   };
-  return pe(() => {
+  return fe(() => {
     Q || (window.addEventListener("resize", se), window.addEventListener("keydown", le), document.addEventListener("fullscreenchange", re), setTimeout(() => {
       window.dispatchEvent(new Event("resize"));
     }, 300), Q = !0);
-  }), $e(() => {
+  }), Ee(() => {
     !Q || (window.removeEventListener("resize", se), window.removeEventListener("keydown", le), document.removeEventListener("fullscreenchange", re), Q = !1);
   }), {
-    data: a,
-    initialVideo: s,
-    setVideoSeek: y,
+    data: s,
+    initialVideo: a,
+    setVideoSeek: g,
     toggleVideoPlay: E,
     toggleVideoMute: m,
     changeVideoVolume: x,
@@ -240,29 +240,29 @@ function P() {
     setVideoPlaybackRate: d,
     toggleVideoRange: ne,
     toggleVideoLoop: _e,
-    toggleVideoBbox: ge,
+    toggleVideoBbox: be,
     toggleFullScreen: ae,
     setMessage: V,
-    onContainerMouseMove: be
+    onContainerMouseMove: ye
   };
 }
 const R = (r, e) => {
   const v = r.__vccOpts || r;
-  for (const [s, i] of e)
-    v[s] = i;
+  for (const [a, i] of e)
+    v[a] = i;
   return v;
-}, Y = (r) => (fe("data-v-05360fd3"), r = r(), me(), r), Fe = { class: "cvp-header" }, Be = /* @__PURE__ */ Y(() => /* @__PURE__ */ n("span", { style: { opacity: "0.5" } }, " / ", -1)), He = { key: 0 }, De = /* @__PURE__ */ Y(() => /* @__PURE__ */ n("span", { style: { opacity: "0.5" } }, " / ", -1)), ze = /* @__PURE__ */ Y(() => /* @__PURE__ */ n("span", { style: { opacity: "0.5" } }, " / ", -1)), Pe = { key: 0 }, Re = /* @__PURE__ */ Y(() => /* @__PURE__ */ n("span", { style: { opacity: "0.5" } }, " / ", -1)), Ie = {
+}, Y = (r) => (me("data-v-05360fd3"), r = r(), he(), r), Fe = { class: "cvp-header" }, Be = /* @__PURE__ */ Y(() => /* @__PURE__ */ n("span", { style: { opacity: "0.5" } }, " / ", -1)), He = { key: 0 }, De = /* @__PURE__ */ Y(() => /* @__PURE__ */ n("span", { style: { opacity: "0.5" } }, " / ", -1)), ze = /* @__PURE__ */ Y(() => /* @__PURE__ */ n("span", { style: { opacity: "0.5" } }, " / ", -1)), Pe = { key: 0 }, Re = /* @__PURE__ */ Y(() => /* @__PURE__ */ n("span", { style: { opacity: "0.5" } }, " / ", -1)), Ie = {
   __name: "Header",
   setup(r) {
-    const { data: e } = P(), v = F(() => e.range.start > 0 && e.range.end > 0), s = F(() => e.video.fps > 0);
-    return (i, y) => (p(), f("div", Fe, [
+    const { data: e } = P(), v = F(() => e.range.start > 0 && e.range.end > 0), a = F(() => e.video.fps > 0);
+    return (i, g) => (p(), f("div", Fe, [
       n("div", {
         class: N(["cvp-information", !t(e).range.enabled && "cvp-information-active"])
       }, [
         n("span", null, $(t(W)(t(e).video.currentTime)), 1),
         Be,
         n("span", null, $(t(W)(t(e).video.duration)), 1),
-        t(s) ? (p(), f("span", He, [
+        t(a) ? (p(), f("span", He, [
           n("span", null, " [ " + $(t(q)(t(C)(t(e).video.currentTime, t(e).video.fps))), 1),
           De,
           n("span", null, $(t(q)(t(C)(t(e).video.duration, t(e).video.fps))) + " ]", 1)
@@ -275,7 +275,7 @@ const R = (r, e) => {
         n("span", null, $(t(W)(t(e).video.currentTime)), 1),
         ze,
         n("span", null, $(t(W)(t(e).range.end)), 1),
-        t(s) ? (p(), f("span", Pe, [
+        t(a) ? (p(), f("span", Pe, [
           n("span", null, " [ " + $(t(q)(t(C)(t(e).video.currentTime, t(e).video.fps))), 1),
           Re,
           n("span", null, $(t(q)(t(C)(t(e).range.end, t(e).video.fps))) + " ]", 1)
@@ -300,15 +300,15 @@ const We = { class: "cvp-main" }, Ne = ["src", "muted", "autoplay"], Ae = {
     "error"
   ],
   setup(r, { emit: e }) {
-    const v = r, s = U(null), i = U(null), { data: y, initialVideo: S, toggleVideoPlay: E } = P(), g = (x) => {
-      Object.assign(y, {
+    const v = r, a = U(null), i = U(null), { data: g, initialVideo: S, toggleVideoPlay: E } = P(), b = (x) => {
+      Object.assign(g, {
         video: {
-          ...y.video,
-          element: s.value,
+          ...g.video,
+          element: a.value,
           canvas: i.value,
-          width: s.value.videoWidth,
-          height: s.value.videoHeight,
-          duration: s.value.duration,
+          width: a.value.videoWidth,
+          height: a.value.videoHeight,
+          duration: a.value.duration,
           paused: !(v.muted === !0 && v.autoplay === !0)
         }
       }), S(), e("loadedmetadata", x);
@@ -317,11 +317,11 @@ const We = { class: "cvp-main" }, Ne = ["src", "muted", "autoplay"], Ae = {
       n("video", {
         class: "cvp-video",
         ref_key: "video",
-        ref: s,
+        ref: a,
         src: r.src,
         muted: r.muted,
         autoplay: r.autoplay,
-        onLoadedmetadata: m[0] || (m[0] = (h) => g(h)),
+        onLoadedmetadata: m[0] || (m[0] = (h) => b(h)),
         onPlay: m[1] || (m[1] = (h) => e("play", h)),
         onPause: m[2] || (m[2] = (h) => e("pause", h)),
         onTimeupdate: m[3] || (m[3] = (h) => e("timeupdate", h)),
@@ -340,17 +340,17 @@ const We = { class: "cvp-main" }, Ne = ["src", "muted", "autoplay"], Ae = {
 const je = { class: "cvp-progress" }, qe = { class: "cvp-progress-drag" }, Ue = ["src"], Ge = { class: "cvp-progress-preview-time" }, Ke = {
   __name: "Progress",
   setup(r) {
-    const e = U(null), v = U(null), { data: s, setVideoSeek: i } = P(), y = F(() => s.range.start > 0 && s.range.end > 0), S = () => {
+    const e = U(null), v = U(null), { data: a, setVideoSeek: i } = P(), g = F(() => a.range.start > 0 && a.range.end > 0), S = () => {
       const {
-        video: { width: E, height: g },
+        video: { width: E, height: b },
         preview: { enabled: x }
-      } = s;
+      } = a;
       if (!x)
         return;
-      const m = v.value.getContext("2d"), h = E * 0.3, D = g * 0.3;
-      v.value.width = h, v.value.height = D, Object.assign(s, {
+      const m = v.value.getContext("2d"), h = E * 0.3, D = b * 0.3;
+      v.value.width = h, v.value.height = D, Object.assign(a, {
         preview: {
-          ...s.preview,
+          ...a.preview,
           element: e.value
         }
       });
@@ -359,42 +359,42 @@ const je = { class: "cvp-progress" }, qe = { class: "cvp-progress-drag" }, Ue = 
       };
       z();
     };
-    return (E, g) => (p(), f("div", je, [
+    return (E, b) => (p(), f("div", je, [
       n("div", qe, [
         n("div", {
           class: "cvp-progress-area",
-          onMousedown: g[0] || (g[0] = he((x) => {
-            t(s).container.mouseDown = !0, t(i)(x);
+          onMousedown: b[0] || (b[0] = ge((x) => {
+            t(a).container.mouseDown = !0, t(i)(x);
           }, ["self"])),
-          onMousemove: g[1] || (g[1] = (...x) => t(i) && t(i)(...x)),
-          onMouseup: g[2] || (g[2] = (x) => t(s).container.mouseDown = !1),
-          onMouseleave: g[3] || (g[3] = (x) => t(s).container.mouseDown = !1)
+          onMousemove: b[1] || (b[1] = (...x) => t(i) && t(i)(...x)),
+          onMouseup: b[2] || (b[2] = (x) => t(a).container.mouseDown = !1),
+          onMouseleave: b[3] || (b[3] = (x) => t(a).container.mouseDown = !1)
         }, [
           n("div", {
             class: "cvp-progress-buffer",
-            style: j({ width: `${t(s).progress.bufferWidth}%` })
+            style: j({ width: `${t(a).progress.bufferWidth}%` })
           }, null, 4),
           n("div", {
             class: "cvp-progress-bar",
-            style: j({ width: `${t(s).progress.seekWidth}%` })
+            style: j({ width: `${t(a).progress.seekWidth}%` })
           }, null, 4),
-          t(y) ? (p(), f("div", {
+          t(g) ? (p(), f("div", {
             key: 0,
             class: "cvp-progress-range",
-            style: j({ left: `${t(s).range.left}px`, width: `${t(s).range.width}px` })
+            style: j({ left: `${t(a).range.left}px`, width: `${t(a).range.width}px` })
           }, null, 4)) : H("", !0)
         ], 32)
       ]),
-      t(s).preview.enabled ? (p(), f("div", {
+      t(a).preview.enabled ? (p(), f("div", {
         key: 0,
         class: "cvp-progress-preview",
-        style: j({ left: `${t(s).preview.left}px` })
+        style: j({ left: `${t(a).preview.left}px` })
       }, [
         n("video", {
           class: "cvp-progress-preview-video",
           ref_key: "video",
           ref: e,
-          src: t(s).video.src,
+          src: t(a).video.src,
           onCanplaythrough: S
         }, null, 40, Ue),
         n("canvas", {
@@ -402,12 +402,12 @@ const je = { class: "cvp-progress" }, qe = { class: "cvp-progress-drag" }, Ue = 
           ref_key: "canvas",
           ref: v
         }, null, 512),
-        n("div", Ge, $(t(s).preview.time), 1)
+        n("div", Ge, $(t(a).preview.time), 1)
       ], 4)) : H("", !0)
     ]));
   }
 }, Je = /* @__PURE__ */ R(Ke, [["__scopeId", "data-v-2f28077b"]]);
-const w = (r) => (fe("data-v-09e1eca1"), r = r(), me(), r), Qe = { class: "cvp-controller" }, Ye = ["title"], Ze = {
+const w = (r) => (me("data-v-09e1eca1"), r = r(), he(), r), Qe = { class: "cvp-controller" }, Ye = ["title"], Ze = {
   key: 0,
   class: "cvp-controller-icon",
   viewBox: "-2 -2 28 28",
@@ -474,11 +474,11 @@ const w = (r) => (fe("data-v-09e1eca1"), r = r(), me(), r), Qe = { class: "cvp-c
   stroke: "none",
   d: "M0 0h24v24H0z",
   fill: "none"
-}, null, -1)), ht = /* @__PURE__ */ w(() => /* @__PURE__ */ n("path", { d: "M15 8a5 5 0 0 1 0 8" }, null, -1)), _t = /* @__PURE__ */ w(() => /* @__PURE__ */ n("path", { d: "M17.7 5a9 9 0 0 1 0 14" }, null, -1)), gt = /* @__PURE__ */ w(() => /* @__PURE__ */ n("path", { d: "M6 15h-2a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h2l3.5 -4.5a0.8 .8 0 0 1 1.5 .5v14a0.8 .8 0 0 1 -1.5 .5l-3.5 -4.5" }, null, -1)), bt = [
+}, null, -1)), ht = /* @__PURE__ */ w(() => /* @__PURE__ */ n("path", { d: "M15 8a5 5 0 0 1 0 8" }, null, -1)), gt = /* @__PURE__ */ w(() => /* @__PURE__ */ n("path", { d: "M17.7 5a9 9 0 0 1 0 14" }, null, -1)), _t = /* @__PURE__ */ w(() => /* @__PURE__ */ n("path", { d: "M6 15h-2a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h2l3.5 -4.5a0.8 .8 0 0 1 1.5 .5v14a0.8 .8 0 0 1 -1.5 .5l-3.5 -4.5" }, null, -1)), bt = [
   mt,
   ht,
-  _t,
-  gt
+  gt,
+  _t
 ], yt = { class: "cvp-controller-volume-drag" }, wt = /* @__PURE__ */ w(() => /* @__PURE__ */ n("svg", {
   class: "cvp-controller-icon",
   viewBox: "-1 -1 26 26",
@@ -581,12 +581,12 @@ const w = (r) => (fe("data-v-09e1eca1"), r = r(), me(), r), Qe = { class: "cvp-c
     const {
       data: e,
       toggleVideoPlay: v,
-      toggleVideoMute: s,
+      toggleVideoMute: a,
       changeVideoVolume: i,
-      changeVideoFrame: y,
+      changeVideoFrame: g,
       setVideoPlaybackRate: S,
       toggleVideoRange: E,
-      toggleVideoLoop: g,
+      toggleVideoLoop: b,
       toggleVideoBbox: x,
       toggleFullScreen: m
     } = P(), h = F(() => e.range.start > 0 && e.range.end > 0), D = F(() => e.video.fps > 0), z = F(() => Object.keys(e.bbox.data).length > 0);
@@ -604,14 +604,14 @@ const w = (r) => (fe("data-v-09e1eca1"), r = r(), me(), r), Qe = { class: "cvp-c
           n("button", {
             class: "cvp-controller-button",
             title: t(e).video.muted ? "Unmute" : "Mute",
-            onClick: d[1] || (d[1] = (...u) => t(s) && t(s)(...u))
+            onClick: d[1] || (d[1] = (...u) => t(a) && t(a)(...u))
           }, [
             t(e).video.muted ? (p(), f("svg", dt, pt)) : (p(), f("svg", ft, bt))
           ], 8, it),
           n("div", yt, [
             n("div", {
               class: "cvp-controller-volume-area",
-              onMousedown: d[2] || (d[2] = he((u) => {
+              onMousedown: d[2] || (d[2] = ge((u) => {
                 t(e).container.mouseDown = !0, t(i)(u);
               }, ["self"])),
               onMousemove: d[3] || (d[3] = (...u) => t(i) && t(i)(...u)),
@@ -629,27 +629,27 @@ const w = (r) => (fe("data-v-09e1eca1"), r = r(), me(), r), Qe = { class: "cvp-c
           class: "cvp-controller-button",
           title: "Backward",
           onMousedown: d[6] || (d[6] = (u) => {
-            t(e).container.mouseDown = !0, t(y)(!1);
+            t(e).container.mouseDown = !0, t(g)(!1);
           }),
           onMouseup: d[7] || (d[7] = (u) => {
-            t(e).container.mouseDown = !1, t(y)(!1);
+            t(e).container.mouseDown = !1, t(g)(!1);
           })
         }, xt, 32),
         n("button", {
           class: "cvp-controller-button",
           title: "Forward",
           onMousedown: d[8] || (d[8] = (u) => {
-            t(e).container.mouseDown = !0, t(y)(!0);
+            t(e).container.mouseDown = !0, t(g)(!0);
           }),
           onMouseup: d[9] || (d[9] = (u) => {
-            t(e).container.mouseDown = !1, t(y)(!0);
+            t(e).container.mouseDown = !1, t(g)(!0);
           })
         }, Mt, 32),
         Tt,
         n("div", $t, [
           n("div", Et, "x" + $(((A = t(e).video.playbackRate) == null ? void 0 : A.toFixed(1)) || "1.0"), 1),
           n("ul", Vt, [
-            (p(!0), f(Ee, null, Ve([0.1, 0.5, 1, 1.5, 2, 5], (u) => (p(), f("li", St, [
+            (p(!0), f(Ve, null, Se([0.1, 0.5, 1, 1.5, 2, 5], (u) => (p(), f("li", St, [
               n("button", {
                 class: "cvp-controller-playback-rate-button",
                 onClick: (ne) => t(S)(u)
@@ -668,7 +668,7 @@ const w = (r) => (fe("data-v-09e1eca1"), r = r(), me(), r), Qe = { class: "cvp-c
         n("button", {
           class: N(["cvp-controller-button", t(e).video.loop && "cvp-controller-button-active"]),
           title: t(e).video.loop ? "Play once" : "Repeat play",
-          onClick: d[11] || (d[11] = (...u) => t(g) && t(g)(...u))
+          onClick: d[11] || (d[11] = (...u) => t(b) && t(b)(...u))
         }, Wt, 10, It),
         t(D) && t(z) ? (p(), f("button", {
           key: 1,
@@ -691,10 +691,10 @@ const Xt = {
   __name: "index",
   setup(r) {
     const { data: e, onContainerMouseMove: v } = P();
-    return (s, i) => (p(), f("div", {
+    return (a, i) => (p(), f("div", {
       class: N(["cvp-footer", t(e).container.mouseMove && "cvp-footer-active"]),
-      onMouseenter: i[0] || (i[0] = (y) => t(e).container.mouseHold = !0),
-      onMouseleave: i[1] || (i[1] = (y) => {
+      onMouseenter: i[0] || (i[0] = (g) => t(e).container.mouseHold = !0),
+      onMouseleave: i[1] || (i[1] = (g) => {
         t(e).container.mouseHold = !1, t(v)();
       })
     }, [
@@ -707,7 +707,7 @@ const to = { class: "cvp-message" }, oo = ["innerHTML"], no = {
   __name: "Message",
   setup(r) {
     const { data: e } = P();
-    return (v, s) => (p(), f("div", to, [
+    return (v, a) => (p(), f("div", to, [
       n("div", {
         class: N(["cvp-message-text", t(e).message.visible ? "cvp-message-text-show" : "cvp-message-text-hide"]),
         innerHTML: t(e).message.text
@@ -734,18 +734,20 @@ const so = ["data-dark-mode", "data-type"], lo = {
     darkMode: { type: Boolean, default: !0 }
   },
   setup(r) {
-    const e = r, v = U(null), { data: s, onContainerMouseMove: i } = P();
-    return Se(() => e.src, (y) => {
-      s.video.src = y;
-    }), pe(() => {
-      Object.assign(s, {
+    const e = r, v = U(null), { data: a, onContainerMouseMove: i } = P();
+    return pe(() => e.src, (g) => {
+      a.video.src = g;
+    }), pe(() => e.range, (g) => {
+      a.range.start = g[0], a.range.end = g[1];
+    }), fe(() => {
+      Object.assign(a, {
         container: {
-          ...s.container,
+          ...a.container,
           element: v.value,
           type: e.type
         },
         video: {
-          ...s.video,
+          ...a.video,
           src: e.src,
           muted: e.muted,
           autoplay: e.autoplay,
@@ -753,32 +755,32 @@ const so = ["data-dark-mode", "data-type"], lo = {
           fps: e.fps
         },
         preview: {
-          ...s.preview,
+          ...a.preview,
           enabled: e.preview
         },
         range: {
-          ...s.range,
+          ...a.range,
           start: e.range[0],
           end: e.range[1],
           enabled: e.range[0] > 0 && e.range[1] > 0
         },
         bbox: {
-          ...s.bbox,
+          ...a.bbox,
           ...e.bbox,
           enabled: Object.keys(e.bbox.data).length > 0
         },
         message: {
-          ...s.message,
+          ...a.message,
           time: e.messageTime
         },
         block: {
-          ...s.block,
+          ...a.block,
           text: "Video file has not been loaded"
         }
-      }), s.container.type === "overlay" && s.container.element.addEventListener("mousemove", i);
+      }), a.container.type === "overlay" && a.container.element.addEventListener("mousemove", i);
     }), Ce(() => {
-      s.container.type === "overlay" && s.container.element.removeEventListener("mousemove", i);
-    }), (y, S) => (p(), f("div", {
+      a.container.type === "overlay" && a.container.element.removeEventListener("mousemove", i);
+    }), (g, S) => (p(), f("div", {
       id: "vue3-canvas-video-player",
       ref_key: "container",
       ref: v,
@@ -793,10 +795,10 @@ const so = ["data-dark-mode", "data-type"], lo = {
       }, null, 8, ["src", "muted", "autoplay"]),
       L(eo),
       L(ao),
-      e.src.length ? H("", !0) : (p(), f("div", lo, $(t(s).block.text), 1))
+      e.src.length ? H("", !0) : (p(), f("div", lo, $(t(a).block.text), 1))
     ], 8, so));
   }
-}, co = /* @__PURE__ */ R(ro, [["__scopeId", "data-v-c95126e3"]]);
+}, co = /* @__PURE__ */ R(ro, [["__scopeId", "data-v-e7689913"]]);
 export {
   co as default
 };

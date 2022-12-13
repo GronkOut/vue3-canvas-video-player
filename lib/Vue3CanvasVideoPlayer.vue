@@ -52,6 +52,10 @@ const { data, onContainerMouseMove } = usePlayer();
 watch(() => props.src, (src) => {
   data.video.src = src;
 });
+watch(() => props.range, (range) => {
+  data.range.start = range[0];
+  data.range.end = range[1];
+});
 
 onMounted(() => {
   Object.assign(data, {
