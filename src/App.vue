@@ -75,57 +75,27 @@ const videoVisible = ref(true);
 
 const muted = ref(true);
 const handleMuted = ({ target }) => {
-  videoVisible.value = false;
-
   muted.value = target.checked;
-
-  setTimeout(() => {
-    videoVisible.value = true;
-  }, 100);
 };
 
 const autoplay = ref(true);
 const handleAutoplay = ({ target }) => {
-  videoVisible.value = false;
-
   autoplay.value = target.checked;
-
-  setTimeout(() => {
-    videoVisible.value = true;
-  }, 100);
 };
 
 const loop = ref(true);
 const handleLoop = ({ target }) => {
-  videoVisible.value = false;
-
   loop.value = target.checked;
-
-  setTimeout(() => {
-    videoVisible.value = true;
-  }, 100);
 };
 
 const range = ref([10, 20]);
 const handleRange = ({ target }) => {
-  videoVisible.value = false;
-
   range.value = target.checked ? [10, 20] : [];
-
-  setTimeout(() => {
-    videoVisible.value = true;
-  }, 100);
 };
 
 const fps = ref(30);
 const handleFps = ({ target }) => {
-  videoVisible.value = false;
-
   fps.value = target.checked ? 30 : 0;
-
-  setTimeout(() => {
-    videoVisible.value = true;
-  }, 100);
 };
 
 const tempData = {
@@ -188,57 +158,27 @@ const bbox = reactive({
   fillColor: 'rgba(0, 0, 255, 0.5)',
 });
 const handleBbox = ({ target }) => {
-  videoVisible.value = false;
-
   Object.assign(bbox, { data: target.checked ? tempData : {} });
-
-  setTimeout(() => {
-    videoVisible.value = true;
-  }, 100);
 };
 
 const type = ref('contain');
 const handleType = ({ target }) => {
-  videoVisible.value = false;
-
   type.value = target.value;
-
-  setTimeout(() => {
-    videoVisible.value = true;
-  }, 100);
 };
 
 const messageTime = ref(1000);
 const handleMessageTime = ({ target }) => {
-  videoVisible.value = false;
-
   messageTime.value = Number(target.value);
-
-  setTimeout(() => {
-    videoVisible.value = true;
-  }, 100);
 };
 
 const preview = ref(true);
 const handlePreview = ({ target }) => {
-  videoVisible.value = false;
-
   preview.value = target.checked;
-
-  setTimeout(() => {
-    videoVisible.value = true;
-  }, 100);
 };
 
 const darkMode = ref(true);
 const handleDarkMode = ({ target }) => {
-  videoVisible.value = false;
-
   darkMode.value = target.checked;
-
-  setTimeout(() => {
-    videoVisible.value = true;
-  }, 100);
 };
 </script>
 

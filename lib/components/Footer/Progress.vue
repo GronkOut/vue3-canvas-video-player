@@ -14,7 +14,7 @@
       </div>
     </div>
     <div v-if="data.preview.enabled" class="cvp-progress-preview" :style="{ left: `${ data.preview.left }px` }">
-      <video class="cvp-progress-preview-video" ref="video" :src="data.video.src" @canplaythrough="onCanplayThrough" />
+      <video class="cvp-progress-preview-video" ref="video" :src="data.video.src" @loadeddata="handleLoadedData" />
       <canvas class="cvp-progress-preview-canvas" ref="canvas" />
       <div class="cvp-progress-preview-time">{{ data.preview.time }}</div>
     </div>
@@ -36,38 +36,40 @@ const { data, setVideoSeek } = usePlayer();
 const hasRange = computed(() => (data.range.start > 0) && (data.range.end > 0));
 
 // handler
-const onCanplayThrough = () => {
-  const {
-    video: { width: videoWidth, height: videoHeight },
-    preview: { enabled: previewEnabled },
-  } = data;
+const handleLoadedData = () => {
+  setTimeout(() => {
+    const {
+      video: { width: videoWidth, height: videoHeight },
+      preview: { enabled: previewEnabled },
+    } = data;
 
-  if (!previewEnabled) return;
+    if (!previewEnabled) return;
 
-  const context = canvas.value.getContext('2d');
-  const canvasWidth = videoWidth * 0.3;
-  const canvasHeight = videoHeight * 0.3;
+    const context = canvas.value.getContext('2d');
+    const canvasWidth = videoWidth * 0.3;
+    const canvasHeight = videoHeight * 0.3;
 
-  canvas.value.width = canvasWidth;
-  canvas.value.height = canvasHeight;
+    canvas.value.width = canvasWidth;
+    canvas.value.height = canvasHeight;
 
-  Object.assign(data, {
-    preview: {
-      ...data.preview,
-      element: video.value,
-    },
-  });
+    Object.assign(data, {
+      preview: {
+        ...data.preview,
+        element: video.value,
+      },
+    });
 
-  const drawCanvas = () => {
-    if (!video.value) return;
+    const drawCanvas = () => {
+      if (!video.value) return;
 
-    context.imageSmoothingEnabled = true;
-    context.drawImage(video.value, 0, 0, canvasWidth, canvasHeight);
+      context.imageSmoothingEnabled = true;
+      context.drawImage(video.value, 0, 0, canvasWidth, canvasHeight);
 
-    window.requestAnimationFrame(drawCanvas);
-  };
+      window.requestAnimationFrame(drawCanvas);
+    };
 
-  drawCanvas();
+    drawCanvas();
+  }, 100);
 };
 </script>
 

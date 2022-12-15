@@ -78,7 +78,7 @@
 
     <!-- 재생 속도 -->
     <div class="cvp-controller-playback-rate">
-      <div class="cvp-controller-playback-rate-text">x{{ data.video.playbackRate?.toFixed(1) || '1.0' }}</div>
+      <div class="cvp-controller-playback-rate-text" title="Playback rate">x{{ data.video.playbackRate?.toFixed(1) || '1.0' }}</div>
       <ul class="cvp-controller-playback-rate-list">
         <li class="cvp-controller-playback-rate-item" v-for="item in [0.1, 0.5, 1.0, 1.5, 2.0, 5.0]">
           <button class="cvp-controller-playback-rate-button" @click="setVideoPlaybackRate(item)">{{ item.toFixed(1) }}</button>
@@ -87,7 +87,13 @@
     </div>
 
     <!-- 전체 / 구간 -->
-    <button v-if="hasRange" class="cvp-controller-button" :title="(data.range.enabled) ? 'Reset range' : 'Set range'" @click="toggleVideoRange">
+    <button
+      v-if="hasRange"
+      class="cvp-controller-button"
+      :class="data.range.enabled && 'cvp-controller-button-active'"
+      :title="(data.range.enabled) ? 'Reset range' : 'Set range'"
+      @click="toggleVideoRange"
+    >
       <!-- 구간 아이콘 -->
       <svg v-if="data.range.enabled" class="cvp-controller-icon" viewBox="-4 -4 32 32" stroke-width="1" stroke="#ffffff" fill="none">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -176,7 +182,7 @@ const {
   changeVideoVolume,
   changeVideoFrame,
   setVideoPlaybackRate,
-  toggleVideoRange,
+  setVideoRange,
   toggleVideoLoop,
   toggleVideoBbox,
   toggleFullScreen,
@@ -186,6 +192,10 @@ const {
 const hasRange = computed(() => (data.range.start > 0) && (data.range.end > 0));
 const hasFps = computed(() => data.video.fps > 0);
 const hasBbox = computed(() => Object.keys(data.bbox.data).length > 0);
+
+const toggleVideoRange = () => {
+  setVideoRange(!data.range.enabled);
+};
 </script>
 
 <style scoped>

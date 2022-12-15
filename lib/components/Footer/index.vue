@@ -1,5 +1,5 @@
 <template>
-  <div class="cvp-footer" :class="data.container.mouseMove && 'cvp-footer-active'" @mouseenter="data.container.mouseHold = true" @mouseleave="data.container.mouseHold = false; onContainerMouseMove()">
+  <div class="cvp-footer" :class="data.container.mouseMove && 'cvp-footer-active'" @mouseenter="data.container.mouseHold = true" @mouseleave="data.container.mouseHold = false; handleContainerMouseMove()">
     <Progress />
     <Controller />
   </div>
@@ -11,7 +11,7 @@ import Progress from './Progress.vue';
 import Controller from './Controller.vue';
 
 // composition
-const { data, onContainerMouseMove } = usePlayer();
+const { data, handleContainerMouseMove } = usePlayer();
 </script>
 
 <style scoped>

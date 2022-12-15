@@ -6,7 +6,7 @@
       :src="src"
       :muted="muted"
       :autoplay="autoplay"
-      @loadedmetadata="(event) => onLoadedMetaData(event)"
+      @loadedmetadata="(event) => handleLoadedMetaData(event)"
       @play="(event) => emit('play', event)"
       @pause="(event) => emit('pause', event)"
       @timeupdate="(event) => emit('timeupdate', event)"
@@ -50,7 +50,7 @@ const emit = defineEmits([
 const { data, initialVideo, toggleVideoPlay } = usePlayer();
 
 // handler
-const onLoadedMetaData = (event) => {
+const handleLoadedMetaData = (event) => {
   Object.assign(data, {
     video: {
       ...data.video,

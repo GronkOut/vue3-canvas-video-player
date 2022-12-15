@@ -33,7 +33,7 @@ const props = defineProps({
   muted: { type: Boolean, default: false }, // 음소거
   autoplay: { type: Boolean, default: false }, // 자동재생
   loop: { type: Boolean, default: false }, // 반복
-  range: { type: Array, validator: (value) => !value.length || (value.length === 2 && value.every((n) => (typeof n === 'number'))), default: () => [0, 0] }, // 구간
+  range: { type: Array, validator: (value) => !value.length || (value.length === 2 && value.every((n) => (typeof n === 'number'))), default: () => ([0, 0]) }, // 구간
   fps: { type: Number, default: 0 }, // FPS
   bbox: { type: Object, default: () => ({ data: {}, borderSize: 1, borderColor: 'rgba(255, 0, 0, 0.5)', fillColor: 'rgba(0, 0, 255, 0.5)' }) }, // 바운딩 박스
   type: { type: String, default: 'overlay' }, // 컨테인 스타일
@@ -46,65 +46,37 @@ const props = defineProps({
 const container = ref(null);
 
 // composition
-const { data, onContainerMouseMove } = usePlayer();
+const { data, setVideoRange, handleContainerMouseMove } = usePlayer();
 
 // watch
-watch(() => props.src, (src) => {
-  data.video.src = src;
-});
-watch(() => props.range, (range) => {
-  data.range.start = range[0];
-  data.range.end = range[1];
-});
+watch(() => props, ({ src, muted, loop, range, fps, bbox, type, messageTime, preview }) => {
+  Object.assign(data.container, { type });
+  Object.assign(data.video, { src, muted, loop, fps });
+  Object.assign(data.preview, { enabled: preview });
+  Object.assign(data.range, { start: range[0], end: range[1] });
+  Object.assign(data.bbox, { ...bbox });
+  Object.assign(data.message, { time: messageTime });
+
+  if (data.range.start && data.range.end) {
+    setVideoRange(true);
+  }
+
+  if (Object.keys(data.bbox.data).length) {
+    data.bbox.enabled = true;
+  }
+}, { deep: true });
 
 onMounted(() => {
-  Object.assign(data, {
-    container: {
-      ...data.container,
-      element: container.value,
-      type: props.type,
-    },
-    video : {
-      ...data.video,
-      src: props.src,
-      muted: props.muted,
-      autoplay: props.autoplay,
-      loop: props.loop,
-      fps: props.fps,
-    },
-    preview: {
-      ...data.preview,
-      enabled: props.preview,
-    },
-    range: {
-      ...data.range,
-      start: props.range[0],
-      end: props.range[1],
-      enabled: props.range[0] > 0 && props.range[1] > 0,
-    },
-    bbox: {
-      ...data.bbox,
-      ...props.bbox,
-      enabled: Object.keys(props.bbox.data).length > 0
-    },
-    message: {
-      ...data.message,
-      time: props.messageTime,
-    },
-    block: {
-      ...data.block,
-      text: 'Video file has not been loaded'
-    },
-  });
+  Object.assign(data, { container: { ...data.container, element: container.value } });
 
   if (data.container.type === 'overlay') {
-    data.container.element.addEventListener('mousemove', onContainerMouseMove);
+    data.container.element.addEventListener('mousemove', handleContainerMouseMove);
   }
 });
 
 onBeforeUnmount(() => {
   if (data.container.type === 'overlay') {
-    data.container.element.removeEventListener('mousemove', onContainerMouseMove);
+    data.container.element.removeEventListener('mousemove', handleContainerMouseMove);
   }
 });
 </script>
