@@ -2,7 +2,7 @@
   <div class="cvp-message">
     <div
       class="cvp-message-text"
-      :class="(data.message.visible) ? 'cvp-message-text-show' : 'cvp-message-text-hide'"
+      :data-visible="data.message.visible"
       v-html="data.message.text"
     />
   </div>
@@ -31,10 +31,10 @@ const { data } = usePlayer();
   color: var(--color-00-100);
   opacity: 0;
 }
-.cvp-message-text.cvp-message-text-show {
+.cvp-message-text[data-visible=true] {
   animation: fadeIn 0.5s 1 forwards;
 }
-.cvp-message-text.cvp-message-text-hide {
+.cvp-message-text[data-visible=false] {
   animation: fadeOut 0.5s 1 forwards;
 }
 

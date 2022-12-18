@@ -90,7 +90,7 @@
     <button
       v-if="hasRange"
       class="cvp-controller-button"
-      :class="data.range.enabled && 'cvp-controller-button-active'"
+      :data-active="data.range.enabled"
       :title="(data.range.enabled) ? 'Reset range' : 'Set range'"
       @click="toggleVideoRange"
     >
@@ -115,7 +115,7 @@
     <!-- 반복 -->
     <button
       class="cvp-controller-button"
-      :class="data.video.loop && 'cvp-controller-button-active'"
+      :data-active="data.video.loop"
       :title="(data.video.loop) ? 'Play once' : 'Repeat play'"
       @click="toggleVideoLoop"
     >
@@ -130,7 +130,7 @@
     <button
       v-if="hasFps && hasBbox"
       class="cvp-controller-button"
-      :class="data.bbox.enabled && 'cvp-controller-button-active'"
+      :data-active="data.bbox.enabled"
       :title="(data.bbox.enabled) ? 'Hide bounding box' : 'Show bounding box'"
       @click="toggleVideoBbox"
     >
@@ -219,7 +219,7 @@ const toggleVideoRange = () => {
   transition: all 0.2s;
   cursor: pointer;
 }
-.cvp-controller-button:hover, .cvp-controller-button.cvp-controller-button-active {
+.cvp-controller-button:hover, .cvp-controller-button[data-active=true] {
   opacity: 1;
   filter: drop-shadow(0 0 3px var(--color-00-100));
 }

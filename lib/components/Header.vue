@@ -1,6 +1,6 @@
 <template>
   <div class="cvp-header">
-    <div class="cvp-information" :class="!data.range.enabled && 'cvp-information-active'">
+    <div class="cvp-information" :data-active="!data.range.enabled">
       <span>{{ secondToTimeString(data.video.currentTime) }}</span>
       <span style="opacity: 0.5;"> / </span>
       <span>{{ secondToTimeString(data.video.duration) }}</span>
@@ -10,7 +10,7 @@
           <span>{{ numericWithComma(secondToFrameNumber(data.video.duration, data.video.fps)) }} ]</span>
         </span>
     </div>
-    <div v-if="hasRange" class="cvp-information" :class="data.range.enabled && 'cvp-information-active'">
+    <div v-if="hasRange" class="cvp-information" :data-active="data.range.enabled">
       <span>{{ secondToTimeString(data.video.currentTime) }}</span>
       <span style="opacity: 0.5;"> / </span>
       <span>{{ secondToTimeString(data.range.end) }}</span>
@@ -55,7 +55,7 @@ const hasFps = computed(() => data.video.fps > 0);
   opacity: 0.1;
   transition: all 0.2s;
 }
-.cvp-information.cvp-information-active {
+.cvp-information[data-active=true] {
   opacity: 1;
 }
 

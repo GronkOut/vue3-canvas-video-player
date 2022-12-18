@@ -1,5 +1,5 @@
 <template>
-  <div class="cvp-footer" :class="data.container.mouseMove && 'cvp-footer-active'" @mouseenter="data.container.mouseHold = true" @mouseleave="data.container.mouseHold = false; handleContainerMouseMove()">
+  <div class="cvp-footer" :data-active="data.container.mouseMove" @mouseenter="data.container.mouseHold = true" @mouseleave="data.container.mouseHold = false; handleContainerMouseMove()">
     <Progress />
     <Controller />
   </div>
@@ -31,7 +31,7 @@ const { data, handleContainerMouseMove } = usePlayer();
   transform: translateY(100px);
   transition: all 0.5s ease-out;
 }
-[data-type=overlay] .cvp-footer.cvp-footer-active {
+[data-type=overlay] .cvp-footer[data-active=true] {
   transform: translateY(0);
 }
 </style>
