@@ -1,6 +1,6 @@
 {
   "name": "vue3-canvas-video-player",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Video player that operates on Vue3 and uses canvas",
   "author": "GronkOut <gronkout@gmail.com>",
   "keywords": [
@@ -20,10 +20,6 @@
   "bugs": {
     "url": "https://github.com/GronkOut/vue3-canvas-video-player/issues",
     "email": "gronkout@gmail.com"
-  },
-  "engines": {
-    "node": ">=16.0.0",
-    "npm": "~8.1.2"
   },
   "directories": {
     "example": "examples",
