@@ -1,23 +1,23 @@
 <template>
   <div class="cvp-header">
     <div class="cvp-information" :data-active="!data.range.enabled">
-      <span>{{ secondToTimeString(data.video.currentTime) }}</span>
+      <span>{{ currentTime }}</span>
       <span style="opacity: 0.5;"> / </span>
-      <span>{{ secondToTimeString(data.video.duration) }}</span>
+      <span>{{ duration }}</span>
       <span v-if="hasFps">
-          <span> [ {{ numericWithComma(secondToFrameNumber(data.video.currentTime, data.video.fps)) }}</span>
+          <span> [ {{ currentFrame }}</span>
           <span style="opacity: 0.5;"> / </span>
-          <span>{{ numericWithComma(secondToFrameNumber(data.video.duration, data.video.fps)) }} ]</span>
+          <span>{{ totalFrame }} ]</span>
         </span>
     </div>
     <div v-if="hasRange" class="cvp-information" :data-active="data.range.enabled">
-      <span>{{ secondToTimeString(data.video.currentTime) }}</span>
+      <span>{{ currentTime }}</span>
       <span style="opacity: 0.5;"> / </span>
-      <span>{{ secondToTimeString(data.range.end) }}</span>
+      <span>{{ rangeTime }}</span>
       <span v-if="hasFps">
-          <span> [ {{ numericWithComma(secondToFrameNumber(data.video.currentTime, data.video.fps)) }}</span>
+          <span> [ {{ currentFrame }}</span>
           <span style="opacity: 0.5;"> / </span>
-          <span>{{ numericWithComma(secondToFrameNumber(data.range.end, data.video.fps)) }} ]</span>
+          <span>{{ rangeFrame }} ]</span>
         </span>
     </div>
   </div>
@@ -34,6 +34,12 @@ const { data } = usePlayer();
 // computed
 const hasRange = computed(() => (data.range.start > 0) && (data.range.end > 0));
 const hasFps = computed(() => data.video.fps > 0);
+const currentTime = computed(() => secondToTimeString(data.video.src && data.video.currentTime || 0));
+const duration = computed(() => secondToTimeString(data.video.src && data.video.duration || 0));
+const rangeTime = computed(() => secondToTimeString(data.video.src && data.range.end || 0));
+const currentFrame = computed(() => numericWithComma(secondToFrameNumber(data.video.src && data.video.currentTime || 0, data.video.fps)));
+const totalFrame = computed(() => numericWithComma(secondToFrameNumber(data.video.src && data.video.duration || 0, data.video.fps)));
+const rangeFrame = computed(() => numericWithComma(secondToFrameNumber(data.video.src && data.range.end || 0, data.video.fps)));
 </script>
 
 <style scoped>

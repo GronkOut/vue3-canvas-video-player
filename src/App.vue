@@ -3,7 +3,7 @@
     <Vue3CanvasVideoPlayer
       class="player"
       v-if="videoVisible"
-      :src="'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'"
+      :src="src"
       :muted="muted"
       :autoplay="autoplay"
       :loop="loop"
@@ -16,6 +16,10 @@
       :darkMode="darkMode"
     />
     <div class="panel">
+      <div class="row">
+        <label for="src">src</label>
+        <input type="text" name="src" :value="src" @change="handleSrc" />
+      </div>
       <div class="row">
         <label for="muted">muted</label>
         <input type="checkbox" name="muted" checked @change="handleMuted" />
@@ -72,6 +76,11 @@ import Vue3CanvasVideoPlayer from '../lib/Vue3CanvasVideoPlayer.vue';
 // import 'vue3-canvas-video-player/dist/style.css';
 
 const videoVisible = ref(true);
+
+const src = ref('https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+const handleSrc = ({ target }) => {
+  src.value = target.value;
+};
 
 const muted = ref(true);
 const handleMuted = ({ target }) => {

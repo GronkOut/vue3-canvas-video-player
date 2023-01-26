@@ -8,9 +8,9 @@
         @mouseup="data.container.mouseDown = false"
         @mouseleave="data.container.mouseDown = false"
       >
-        <div class="cvp-progress-buffer" :style="{ width: `${ data.progress.bufferWidth }%` }" />
-        <div class="cvp-progress-bar" :style="{ width: `${ data.progress.seekWidth }%` }" />
-        <div v-if="hasRange" class="cvp-progress-range" :style="{ left: `${ data.range.left }px`, width: `${ data.range.width }px` }" />
+        <div class="cvp-progress-buffer" :style="{ width: bufferWith }" />
+        <div class="cvp-progress-bar" :style="{ width: barWidth }" />
+        <div v-if="hasRange" class="cvp-progress-range" :style="{ left: rangeLeft, width: rangeWidth }" />
       </div>
     </div>
     <div v-if="data.preview.enabled" class="cvp-progress-preview" :style="{ left: `${ data.preview.left }px` }">
@@ -34,6 +34,10 @@ const { data, setVideoSeek } = usePlayer();
 
 // computed
 const hasRange = computed(() => (data.range.start > 0) && (data.range.end > 0));
+const bufferWith = computed(() => `${ data.video.src && data.progress.bufferWidth || 0 }%`);
+const barWidth = computed(() => `${ data.video.src && data.progress.seekWidth || 0 }%`);
+const rangeLeft = computed(() => `${ data.video.src && data.range.left || 0 }px`);
+const rangeWidth = computed(() => `${ data.video.src && data.range.width || 0 }px`);
 
 // handler
 const handleLoadedData = () => {
