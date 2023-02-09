@@ -32,14 +32,15 @@ import 'vue3-canvas-video-player/dist/style.css';
     :fps="30" // 0
     :bbox="{
       data: {
-        100: [0, 200, 100, 400],
-        101: [10, 210, 110, 410],
-        102: [20, 220, 120, 420],
+        100: [{ label: 'stone', xywh: [0, 200, 100, 400] }, { label: 'flower', xywh: [50, 250, 150, 450] }],
+        101: [{ label: 'stone', xywh: [1, 201, 101, 401] }, { label: 'flower', xywh: [51, 251, 151, 451] }],
+        102: [{ label: 'stone', xywh: [2, 202, 102, 402] }, { label: 'flower', xywh: [52, 252, 152, 452] }],
       },
+      textColor: '#fff',
+      fillColor: 'rgba(0, 0, 255, 0.5)',
       borderSize: 1,
       borderColor: 'rgba(255, 0, 0, 0.5)',
-      fillColor: 'rgba(0, 0, 255, 0.5)',
-    }" // { data: {}, borderSize: 1, borderColor: 'rgba(255, 0, 0, 0.5)', fillColor: 'rgba(0, 0, 255, 0.5)' }; } }
+    }" // { data: {}, textColor: '#fff', fillColor: 'rgba(0, 0, 255, 0.5)', borderSize: 1, borderColor: 'rgba(255, 0, 0, 0.5)' }; } }
     :type="'contain'" // 'overlay'
     :messageTime="1000" // 1000
     :preview="true" // false
